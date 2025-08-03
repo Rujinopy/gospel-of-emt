@@ -8,19 +8,19 @@ const stickyHeader = true;
 
 const menu = [
   {
-    name: "Home",
+    name: "หน้าแรก",
     url: "/",
   },
+  // {
+  //   name: "About",
+  //   url: "/about",
+  // },
   {
-    name: "About",
-    url: "/about",
-  },
-  {
-    name: "Docs",
+    name: "Lore",
     url: "/docs",
   },
   {
-    name: "Blog",
+    name: "อ่านเว็บโนเวลแปล",
     url: "/blog",
   },
   {
@@ -35,14 +35,14 @@ const menu = [
     name: "Index Cards",
     url: "/index-cards",
   },
-  {
-    name: "Authors",
-    url: "/authors",
-  },
-  {
-    name: "Portfolio",
-    url: "/portfolio",
-  },
+  // {
+  //   name: "Authors",
+  //   url: "/authors",
+  // },
+  // {
+  //   name: "Portfolio",
+  //   url: "/portfolio",
+  // },
 ];
 ---
 
@@ -78,7 +78,7 @@ const menu = [
           <li class="">
             <a
               href={item.url}
-              class={`block p-2 font-secondary font-semibold text-txt-p transition dark:text-darkmode-txt-p lg:px-2 lg:py-3 ${
+              class={`block p-2 font-notoLooped font-semibold text-txt-p transition dark:text-darkmode-txt-p lg:px-2 lg:py-3 ${
                 (pathname === `${item.url}/` || pathname === item.url) &&
                 "active"
               }`}
