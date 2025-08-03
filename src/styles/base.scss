@@ -3,7 +3,7 @@ html {
 }
 
 body {
-  @apply font-secondary font-normal leading-relaxed text-txt-s dark:text-darkmode-txt-s;
+  @apply font-notoLooped font-normal leading-relaxed text-txt-s dark:text-darkmode-txt-s;
   @apply bg-bg-p dark:bg-darkmode-bg-p;
   @apply flex flex-col min-h-screen lg:mx-8;
 }

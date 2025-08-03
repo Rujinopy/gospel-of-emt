@@ -88,6 +88,7 @@ module.exports = {
       fontFamily: {
         primary: [fontPrimary, fontPrimaryType],
         secondary: [fontSecondary, fontSecondaryType],
+        notoLooped: ["Noto Sans Thai Looped Variable", "sans-serif"],
       },
       spacing: {
         "1/2": "50%",
@@ -116,12 +117,12 @@ module.exports = {
       },
       animation: {
         // Intersect
-        fade: "fadeIn 1000ms both",
-        fadeUp: "fadeInUp 1000ms both",
-        fadeDown: "fadeInDown 1000ms both",
-        fadeRight: "fadeInRight 1000ms both",
-        fadeLeft: "fadeInLeft 1000ms both",
-        scale: "scaleOut 1000ms both",
+        fade: "fadeIn 700ms both",
+        fadeUp: "fadeInUp 700ms both",
+        fadeDown: "fadeInDown 700ms both",
+        fadeRight: "fadeInRight 700ms both",
+        fadeLeft: "fadeInLeft 700ms both",
+        scale: "scaleOut 700ms both",
         // Star Background
         twinkle: "twinkle 5s infinite ease-in-out",
         // Cycle Background

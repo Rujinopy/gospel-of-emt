@@ -7,6 +7,8 @@ import "@/styles/main.scss";
 import { ClientRouter } from "astro:transitions";
 import Background from "@/components/base/Background.astro";
 import { Tooltips } from "astro-tooltips";
+// Supports weights 100-900
+import '@fontsource-variable/noto-sans-thai-looped';
 
 // types for frontmatters
 export interface Props {
@@ -19,10 +21,10 @@ export interface Props {
 
 const { title, description, image, noindex, canonical } = Astro.props;
 
-const siteTitle = "Astrogon";
-const siteDescription = "Astrogon is a simple and elegant Astro theme.";
+const siteTitle = "Gospel of EMT";
+const siteDescription = "Gospel of EMT - A collection of Re:zero webnovels translated into Thai.";
 const siteImage = "@assets/og-image.png";
-const siteAuthor = "Jane Doe";
+const siteAuthor = "Gospel of EMT";
 const baseUrl = "https://janedoe.com";
 ---
 
@@ -132,7 +134,10 @@ const baseUrl = "https://janedoe.com";
     <Tooltips interactive={false} delay={[333, 0]} />
   </head>
   <body>
-    <Background />
+    <div class="">
+     <Background /> 
+    </div>
+    
     <Header />
     <main id="main-content" class="flex-1">
       <slot/>
