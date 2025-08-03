@@ -1,9 +1,10 @@
 ---
 import BaseLayout from "@components/base/BaseLayout.astro";
 import PageHeader from "@components/common/PageHeader.astro";
-import { upperHumanize } from "@lib/textConverter";
+import { upperHumanize, slugify } from "@lib/textConverter";
 import BlogCard from "@components/blog/Card.astro";
 import type { BlogEntry } from "@/types";
+import { FaRegFolder } from "react-icons/fa";
 
 interface Props {
   taxon: string;
@@ -21,8 +22,11 @@ const { taxon, entries }: Props = Astro.props;
         <div class="row">
           {
             entries.map((entry) => (
-              <div class="py-2 md:py-4 md:col-6">
-                <BlogCard entry={entry} />
+              <div class="py-2 md:py-2 md:col-10 ">
+                {/* <BlogCard entry={entry} /> */}
+                <h4 class="mb-2 font-notoLooped text-[16px]">
+                  <a href={`/blog/${entry.id}`}>{entry.data.title}</a>
+                </h4>
               </div>
             ))
           }
