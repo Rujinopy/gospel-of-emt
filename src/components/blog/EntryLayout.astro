@@ -2,6 +2,7 @@
 import BaseLayout from "@components/base/BaseLayout.astro";
 import BlogCard from "@components/blog/Card.astro";
 import Share from "@components/common/Share.astro";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { plainify } from "@lib/textConverter";
 import type { BlogEntry } from "@/types";
 import TableOfContents from "@components/common/TableOfContents.astro";
@@ -10,9 +11,10 @@ import EntryHeader from "@components/common/EntryHeader.astro";
 interface Props {
   entry: BlogEntry;
   relatedEntries: BlogEntry[];
+  entryLength: number;
 }
 
-const { entry, relatedEntries }: Props = Astro.props;
+const { entry, relatedEntries, entryLength }: Props = Astro.props;
 const { title, description, autodescription, image, hideToc } = entry.data;
 const { Content, headings } = await render(entry);
 
@@ -20,11 +22,30 @@ const descriptionLenth = 200; // the max length in characters for the auto-gener
 const globalHideToc = false; // set true to always hide the table of contents (right side menu)
 const tocDepth = 3; // maximum depth for the table of contents 1 = h1, etc
 
-const actuallyHideToc = hideToc || globalHideToc || headings.filter((heading) => heading.depth <= tocDepth).length === 0;
+const actuallyHideToc =
+  hideToc ||
+  globalHideToc ||
+  headings.filter((heading) => heading.depth <= tocDepth).length === 0;
 
 const entryDescription =
   description ||
   (autodescription ? plainify(entry.body!.slice(0, descriptionLenth)) : null);
+
+// Chapter navigation logic
+const entryId = entry.id;
+const chapterMatch = entryId.match(/^(.+-)(\d+)$/);
+const baseId = chapterMatch ? chapterMatch[1] : null;
+const currentChapter = chapterMatch ? parseInt(chapterMatch[2]) : null;
+const prevChapter = currentChapter ? currentChapter - 1 : null;
+const nextChapter = currentChapter ? currentChapter + 1 : null;
+const prevChapterUrl =
+  baseId && prevChapter && prevChapter > 0
+    ? `/blog/${baseId}${prevChapter}`
+    : null;
+const nextChapterUrl =
+  baseId && nextChapter && nextChapter <= entryLength
+    ? `/blog/${baseId}${nextChapter}`
+    : null;
 ---
 
 <BaseLayout title={title} description={entryDescription} image={image?.src}>
@@ -42,7 +63,9 @@ const entryDescription =
             showTags
           />
         </section>
-        <section class="content mb-4 glass px-4 rounded-lg">
+        <section
+          class="content mb-4 glass px-5 md:px-[22%] rounded-lg font-notoLooped"
+        >
           <Content />
         </section>
       </article>
@@ -53,7 +76,7 @@ const entryDescription =
       <TableOfContents {headings} />
     </div>
   </section>
-
+  <!-- 
   <section class=`container items-start justify-between mt-4`>
     <hr />
     <div class="flex items-center justify-center lg:justify-end mt-4">
@@ -64,22 +87,47 @@ const entryDescription =
         id={entry.id}
       />
     </div>
-  </section>
-  <!-- Related posts -->
-  {
-    relatedEntries.length > 0 && (
-      <section class="row justify-center my-8">
-        <h2 class="h3 mb-4 text-center">Related Posts</h2>
-        <div class="lg:col-10">
-          <div class="row justify-center">
-            {relatedEntries.slice(0, 2).map((entry) => (
-              <div class="md:col-6 px-4 py-2 h-min">
-                <BlogCard entry={entry} />
-              </div>
-            ))}
+  </section> -->
+
+  <!-- Next Chapter -->
+  <section class="container my-8 text-xl">
+    <!-- <hr /> -->
+    <div class="flex items-center justify-center space-x-10">
+      {
+        prevChapterUrl && (
+          <a href={prevChapterUrl} class="btn btn-secondary font-notoLooped">
+            <FaArrowLeft className="inline-block mr-2" /> ตอนก่อนหน้า
+          </a>
+        )
+      }
+      {
+        nextChapterUrl && (
+          <a href={nextChapterUrl} class="btn btn-primary font-notoLooped">
+            ตอนถัดไป
+            <FaArrowRight className="inline-block ml-2" />
+          </a>
+        )
+      }
+    </div>
+
+    <!-- Related posts -->
+    <!-- {
+      relatedEntries.length > 0 && (
+        <section class="row justify-center my-8">
+          <h2 class="h3 mb-4 text-center">Related Posts</h2>
+          <div class="lg:col-10">
+            <div class="row justify-center">
+              {relatedEntries.slice(0, 2).map((entry) => (
+                <div class="md:col-6 px-4 py-2 h-min">
+                  <BlogCard entry={entry} />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-    )
-  }
+        </section>
+      )
+    } -->
+  </section>
 </BaseLayout>
+
+

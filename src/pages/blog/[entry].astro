@@ -20,4 +20,4 @@ const { entry, entries } = Astro.props;
 const relatedEntries = similerItems(entry, entries, entry.id);
 ---
 
-<EntryLayout entry={entry} relatedEntries={relatedEntries} />
+<EntryLayout entry={entry} relatedEntries={relatedEntries} entryLength={entries.length} />
