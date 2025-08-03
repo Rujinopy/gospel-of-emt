@@ -58,3 +58,4 @@ dist/
 
 # Wrangler output
 .wrangler/
+src/content/blog/commands.txt
