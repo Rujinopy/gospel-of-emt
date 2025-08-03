@@ -72,8 +72,8 @@ const stars = Array.from({ length: numStars }).map(() => ({
   }
 
   html::before {
-    background-image: url(/src/assets/backgrounds/bwca-day.png);
-    opacity: 1;
+    background-image: url(/src/assets/backgrounds/emt3.jpg);
+    opacity: 0.25;
   }
 
   html.dark::before {
@@ -81,8 +81,14 @@ const stars = Array.from({ length: numStars }).map(() => ({
   }
 
   html::after {
-    background-image: url(/src/assets/backgrounds/bwca-night.png);
+    background-image: url(/src/assets/backgrounds/mansionnight.png);
     opacity: 0;
+  }
+
+  @media (min-width: 769px) {
+    html::after {
+      filter: brightness(0.5);
+    }
   }
 
   html.dark::after {
