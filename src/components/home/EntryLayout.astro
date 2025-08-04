@@ -34,7 +34,10 @@ const { image, imageAlt, title, content, button } = entry.data;
               
             )
           } -->
-          <h1 set:html={markdownify(title)} class="mb-4" />
+          <h1 set:html={markdownify(title)} class="mb-4 hover:scale-150 transition-all duration-300"
+          
+          
+          />
           <p set:html={markdownify(content)} class="mb-8" />
           <!-- {
             button && (
