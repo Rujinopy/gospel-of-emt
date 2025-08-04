@@ -35,3 +35,13 @@ input#nav-toggle:checked + label #hide-button {
 input#nav-toggle:checked ~ #nav-menu {
   @apply block;
 }
+
+// Reset nav state on medium screens and above
+@media (min-width: 768px) {
+  input#nav-toggle:checked ~ #nav-menu {
+    @apply flex;
+  }
+  #nav-menu {
+    @apply flex;
+  }
+}
