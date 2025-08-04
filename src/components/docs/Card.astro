@@ -7,8 +7,9 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { title, image, imageAlt } = entry.data;
+const { title, image, imageAlt, helperPath } = entry.data;
 ---
+
 
 <div
   class="h-full m-2 pl-0 bg-gradient-to-br gradient rounded-lg intersect:animate-fadeUp opacity-0"
@@ -16,7 +17,7 @@ const { title, image, imageAlt } = entry.data;
   <div class="glass h-full rounded-lg">
     <a
       class="group hover:opacity-100"
-      href={`/docs/${entry.id.replace("/-index", "")}`}
+      href={`${helperPath ? helperPath : `/docs/${entry.id.replace("/-index", "")}`}`}
     >
       <div class="relative rounded-lg pb-9/16 overflow-hidden">
         {

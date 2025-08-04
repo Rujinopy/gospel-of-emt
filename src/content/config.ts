@@ -72,6 +72,7 @@ const docs = defineCollection({
       imageAlt: z.string().default(""),
       hideToc: z.boolean().default(false),
       hideNav: z.boolean().default(false),
+      helperPath: z.string().optional(),
     }),
 });
 
