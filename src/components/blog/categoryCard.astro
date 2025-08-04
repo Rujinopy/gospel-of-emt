@@ -1,0 +1,23 @@
+---
+import type { BlogEntry } from "@/types";
+
+interface Props {
+  entry: BlogEntry;
+}
+
+const { entry }: Props = Astro.props;
+const {
+  title,
+} = entry.data;
+
+---
+
+<div class="h-full m-2 pl-0 bg-gradient-to-br gradient rounded-lg">
+  <div class="glass h-full rounded-lg p-2 pb-0 intersect:animate-fadeUp opacity-0 ">
+    <h4 class=" font-notoLooped text-xl">
+      <a href={`/blog/${entry.id}`}>
+        {title}
+      </a>
+    </h4>
+  </div>
+</div>

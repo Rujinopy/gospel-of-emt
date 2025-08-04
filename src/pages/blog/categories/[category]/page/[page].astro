@@ -16,22 +16,12 @@ export async function getStaticPaths() {
     const filteredEntries: BlogEntry[] = taxonomyFilter(entries, "categories", taxon);
     const pageCount = Math.ceil(filteredEntries.length / entriesPerPage);
 
-    // Main category page (page 1)
-    paths.push({
-      params: {
-        category: slugify(taxon),
-      },
-      props: { 
-        taxon,
-        currentPage: 1,
-      },
-    });
-
-    // Additional pages for pagination
+    // Generate pagination routes for each category
     for (let i = 2; i <= pageCount; i++) {
       paths.push({
         params: {
-          category: `${slugify(taxon)}/page/${i}`,
+          category: slugify(taxon),
+          page: i.toString(),
         },
         props: { 
           taxon,

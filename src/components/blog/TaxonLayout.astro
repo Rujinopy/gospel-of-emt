@@ -2,16 +2,41 @@
 import BaseLayout from "@components/base/BaseLayout.astro";
 import PageHeader from "@components/common/PageHeader.astro";
 import { upperHumanize, slugify } from "@lib/textConverter";
-import BlogCard from "@components/blog/Card.astro";
+import CategoryCard from "@components/blog/categoryCard.astro";
 import type { BlogEntry } from "@/types";
 import { FaRegFolder } from "react-icons/fa";
+import Pagination from "@components/common/Pagination.astro";
 
 interface Props {
   taxon: string;
   entries: BlogEntry[];
+  currentPage?: number;
 }
 
-const { taxon, entries }: Props = Astro.props;
+const { category } = Astro.params;
+const entriesPerPage = 6;
+const { taxon, entries, currentPage }: Props = Astro.props;
+
+// Extract page number from category param if it contains "page/"
+let currentPageIndex = currentPage || 1;
+if (!currentPage && category && category.includes("/page/")) {
+  const pageMatch = category.match(/\/page\/(\d+)$/);
+  if (pageMatch) {
+    currentPageIndex = parseInt(pageMatch[1]);
+  }
+}
+const pageCount: number = Math.ceil(entries.length / entriesPerPage);
+
+// Sort entries by date ascending BEFORE pagination
+const sortedEntries = entries.sort((a, b) => {
+  const dateA = new Date(a.data.date || "1970-01-01");
+  const dateB = new Date(b.data.date || "1970-01-01");
+  return dateA.getTime() - dateB.getTime();
+});
+
+const indexOfLastEntry = currentPageIndex * entriesPerPage;
+const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;
+const currentEntries = sortedEntries.slice(indexOfFirstEntry, indexOfLastEntry);
 ---
 
 <BaseLayout title={upperHumanize(taxon)}>
@@ -21,17 +46,22 @@ const { taxon, entries }: Props = Astro.props;
       <div class="container">
         <div class="row">
           {
-            entries.map((entry) => (
-              <div class="py-2 md:py-2 md:col-10 ">
-                {/* <BlogCard entry={entry} /> */}
-                <h4 class="mb-2 font-notoLooped text-[16px]">
+            currentEntries.map((entry) => (
+                <div class="py-2 md:py-2 md:col-10 ">
+                  <CategoryCard entry={entry} />
+                  {/* <h4 class="mb-2 font-notoLooped text-[16px]">
                   <a href={`/blog/${entry.id}`}>{entry.data.title}</a>
-                </h4>
-              </div>
-            ))
+                </h4> */}
+                </div>
+              ))
           }
         </div>
       </div>
     </div>
+    <Pagination
+      collection={`blog/categories/${slugify(taxon)}`}
+      pageIndex={currentPageIndex}
+      pageCount={pageCount}
+    />
   </section>
 </BaseLayout>
