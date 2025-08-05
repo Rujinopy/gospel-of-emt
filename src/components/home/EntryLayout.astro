@@ -34,11 +34,14 @@ const { image, imageAlt, title, content, button } = entry.data;
               
             )
           } -->
-          <h1 set:html={markdownify(title)} class="mb-4 hover:scale-150 transition-all duration-300"
+          <!-- <h1 set:html={markdownify(title)} class="mb-4 hover:scale-150 transition-all duration-300"
           
           
-          />
-          <p set:html={markdownify(content)} class="mb-8" />
+          /> -->
+          <div class="md:mt-20">
+          <h1 class="text-6xl mb-2 md:px-0 px-32 mx-auto text-center flex justify-center items-center flex-col md:flex-row">Gospel of <span class="md:ml-5 inline-block text-purple-400">EMT</span></h1>
+          <p set:html={markdownify(content)} class="mb-8 glass w-fit text-center mx-auto px-2 py-1 rounded-full" />
+          </div>
           <!-- {
             button && (
               <Button
