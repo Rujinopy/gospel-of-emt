@@ -68,7 +68,7 @@ const SearchPage = ({ searchList }: Props) => {
             <div className="flex flex-nowrap">
               <input
                 className="w-full glass rounded-lg px-6 py-4 text-txt-p placeholder:text-txt-light dark:placeholder:text-darkmode-txt-light focus:border-darkmode-border focus:ring-transparent dark:text-darkmode-txt-light intersect:animate-fadeDown opacity-0 intersect-no-queue"
-                placeholder="search posts"
+                placeholder="ค้นหาบทความ"
                 type="search"
                 name="search"
                 value={inputVal}
@@ -82,17 +82,17 @@ const SearchPage = ({ searchList }: Props) => {
         </div>
         <div className="row">
           {searchResults?.length < 1 ? (
-            <div className="col-10 lg:col-8 mx-auto p-2 text-center glass rounded-lg intersect:animate-fadeUp opacity-0">
+            <div className="col-10 lg:col-8 mx-auto p-2 text-center rounded-lg intersect:animate-fadeUp opacity-0">
               <p>
                 {inputVal.length < 1
-                  ? "Looking for something?"
-                  : "We couldn't find what you searched for. Try searching again."}
+                  ? "ค้นหาบทความที่ต้องการ พิมพ์อย่างน้อย 3 ตัวอักษร"
+                  : "ไม่พบผลลัพธ์ที่ค้นหา ลองค้นหาอีกครั้ง"}
               </p>
             </div>
           ) : (
             searchResults?.map(({ item }, index) => (
               <div className="py-2 px-0" key={`search-${index}`}>
-                <div className="h-full glass col-10 lg:col-8 mx-auto rounded-lg p-4 intersect:animate-fade opacity-0">
+                <div className="h-full neobrutalism-button font-notoLooped cursor-pointer col-10 lg:col-8 mx-auto rounded-lg p-4 intersect:animate-fade opacity-0">
                   <h4 className="mb-2">
                     <a href={"/" + getPath(item)}>
                       {item.data.title}
