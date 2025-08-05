@@ -124,12 +124,12 @@ tags?.sort((a: string, b: string) => a.localeCompare(b));
               {formatDate(modDate)}
             </li>
           )}
-          {complexity && complexity > 0 && showReadingTime && (
+          {/* {complexity && complexity > 0 && showReadingTime && (
             <li class="mr-1 inline-block">
               <FaRegClock className={"ml-2 -mt-1 inline-block"} />
               {readingTime(entry.body!, complexity)}
             </li>
-          )}
+          )} */}
           {categories && showCategories && (
             <li class="mr-1 inline-block">
               {categories.map((category: string, index: number) => (

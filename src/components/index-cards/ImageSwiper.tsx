@@ -96,7 +96,7 @@ const ImageSwiper = ({ images }: Props) => {
         <div className="glass rounded-lg p-4 mx-2">
           <div className="flex items-center justify-between gap-6 min-w-64">
             <button
-              className="flex items-center justify-center w-10 h-10 rounded-full bg-bg-s/50 hover:bg-bg-s transition-colors cursor-pointer text-txt-p dark:text-darkmode-txt-p hover:text-txt-h dark:hover:text-darkmode-txt-h"
+              className="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-purple-300 border-black border-[1px] transition-colors cursor-pointer text-txt-p dark:text-darkmode-txt-p hover:text-txt-h dark:hover:text-darkmode-txt-h"
               onClick={() => swiper?.slidePrev()}
               aria-label="Previous image"
             >
@@ -106,7 +106,7 @@ const ImageSwiper = ({ images }: Props) => {
             <div className="flex items-center gap-2 px-2">
               <input
                 type="number"
-                className="w-12 text-center bg-bg-s/30 border border-border/30 dark:border-darkmode-border/30 rounded px-2 py-1 text-sm text-txt-p dark:text-darkmode-txt-p focus:outline-none focus:border-primary"
+                className="w-12 text-center bg-bg-s/30 border border-gray-300 dark:border-darkmode-border/30 rounded px-2 py-1 text-sm text-txt-p dark:text-darkmode-txt-p focus:outline-none focus:border-primary"
                 min={1}
                 max={images.length}
                 value={currentIndex + 1}
@@ -128,7 +128,7 @@ const ImageSwiper = ({ images }: Props) => {
             </div>
 
             <button
-              className="flex items-center justify-center w-10 h-10 rounded-full bg-bg-s/50 hover:bg-bg-s transition-colors cursor-pointer text-txt-p dark:text-darkmode-txt-p hover:text-txt-h dark:hover:text-darkmode-txt-h"
+              className="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-purple-300 border-black border-[1px] transition-colors cursor-pointer text-txt-p dark:text-darkmode-txt-p hover:text-txt-h dark:hover:text-darkmode-txt-h"
               onClick={() => swiper?.slideNext()}
               aria-label="Next image"
             >
