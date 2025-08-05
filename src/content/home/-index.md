@@ -1,6 +1,6 @@
 ---
 image: "@assets/astrogon-star.svg"
-imageAlt: Astrogon logo
+imageAlt: gospel of emt
 title: Gospel of EMT
 content: "แปลเว็บโนเวล Re: ゼロ / Cult of EMT"
 button:
