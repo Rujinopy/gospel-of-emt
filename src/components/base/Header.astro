@@ -48,9 +48,9 @@ const menu = [
 
 <header
   transition:persist
-  class={`container glass-b lg:mt-4 lg:rounded-lg ${stickyHeader && "sticky top-0"}`}
+  class={`container glass-b lg:mt-4 lg:rounded-lg "}`}
 >
-  <nav class="relative flex flex-wrap items-center justify-between">
+  <nav class="relative flex flex-wrap items-center justify-between h-14 md:h-auto">
     <!-- navbar toggler -->
     <input id="nav-toggle" type="checkbox" class="hidden" />
     <label
@@ -78,7 +78,7 @@ const menu = [
           <li class="">
             <a
               href={item.url}
-              class={`block p-2 font-notoLooped font-semibold text-txt-p transition dark:text-darkmode-txt-p lg:px-2 lg:py-3 ${
+              class={`block p-2 font-notoLooped font-semibold text-txt-p transition-all hover:-translate-y-1 hover:text-purple-300 dark:text-darkmode-txt-p lg:px-2 lg:py-3 ${
                 (pathname === `${item.url}/` || pathname === item.url) &&
                 "active"
               }`}
