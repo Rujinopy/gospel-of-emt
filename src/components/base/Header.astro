@@ -1,5 +1,6 @@
 ---
 import ThemeSwitcher from "@components/base/ThemeSwitcher.astro";
+import { is } from "date-fns/locale";
 import { IoSearch } from "react-icons/io5";
 
 const { pathname } = Astro.url;
@@ -48,9 +49,9 @@ const menu = [
 
 <header
   transition:persist
-  class={`container glass-b lg:mt-4 lg:rounded-lg "}`}
+  class={`container glass-b lg:mt-4 lg:rounded-lg relative z-50`}
 >
-  <nav class="relative flex flex-wrap items-center justify-between h-14 md:h-auto">
+  <nav class="relative flex flex-wrap items-center justify-between h-14 md:h-auto z-50">
     <!-- navbar toggler -->
     <input id="nav-toggle" type="checkbox" class="hidden" />
     <label
@@ -59,7 +60,7 @@ const menu = [
     >
       <svg id="show-button" class="h-6 fill-current block" viewBox="0 0 20 20">
         <title>Menu Open</title>
-        <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path>
+        <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V15z"></path>
       </svg>
       <svg id="hide-button" class="h-6 fill-current hidden" viewBox="0 0 20 20">
         <title>Menu Close</title>
@@ -78,6 +79,7 @@ const menu = [
           <li class="">
             <a
               href={item.url}
+
               class={`block p-2 font-notoLooped font-semibold text-txt-p transition-all hover:-translate-y-1 hover:text-purple-300 dark:text-darkmode-txt-p lg:px-2 lg:py-3 ${
                 (pathname === `${item.url}/` || pathname === item.url) &&
                 "active"

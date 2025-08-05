@@ -33,15 +33,27 @@ input#nav-toggle:checked + label #hide-button {
   @apply block;
 }
 input#nav-toggle:checked ~ #nav-menu {
-  @apply block;
+  @apply block absolute top-full left-0 w-full bg-white dark:bg-slate-950 border border-black dark:border-slate-800 rounded-lg mt-2 shadow-lg py-4;
+  z-index: 99999 !important;
+  position: absolute !important;
+}
+
+// Mobile menu styling
+@media (max-width: 767px) {
+  input#nav-toggle:checked ~ #nav-menu li {
+    @apply border-b border-gray-200 dark:border-gray-700 last:border-b-0;
+  }
+  input#nav-toggle:checked ~ #nav-menu li a {
+    @apply py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors;
+  }
 }
 
 // Reset nav state on medium screens and above
 @media (min-width: 768px) {
   input#nav-toggle:checked ~ #nav-menu {
-    @apply flex;
+    @apply flex static bg-transparent dark:bg-transparent border-0 shadow-none mt-0 py-0;
   }
   #nav-menu {
-    @apply flex;
+    @apply flex static bg-transparent dark:bg-transparent border-0 shadow-none mt-0 py-0;
   }
 }
