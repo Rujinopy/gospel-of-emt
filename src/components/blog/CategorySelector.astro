@@ -1,0 +1,87 @@
+---
+import { upperHumanize } from "@lib/textConverter";
+
+interface Props {
+  categories: string[];
+  className?: string;
+}
+
+const { categories, className = "" } = Astro.props;
+---
+
+<div class={`category-selector ${className}`}>
+  <label for="mobile-category-selector" class="sr-only">เลือกหมวดหมู่</label>
+  <select
+    id="mobile-category-selector"
+    class="w-full glass rounded-lg p-3 border border-black dark:border-gray-600 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all font-notoLooped"
+    aria-label="เลือกหมวดหมู่"
+  >
+    <option value="">เลือกหมวดหมู่</option>
+    {
+      categories.map((category) => (
+        <option value={category}>{upperHumanize(category)}</option>
+      ))
+    }
+  </select>
+</div>
+
+<script>
+  class CategorySelector {
+    private selector: HTMLSelectElement | null = null;
+    
+    constructor() {
+      this.init();
+    }
+    
+    private init(): void {
+      this.selector = document.getElementById('mobile-category-selector') as HTMLSelectElement;
+      
+      if (this.selector) {
+        this.selector.addEventListener('change', this.handleChange.bind(this));
+      }
+    }
+    
+    private handleChange(event: Event): void {
+      const target = event.target as HTMLSelectElement;
+      const selectedCategory = target.value;
+      
+      if (selectedCategory) {
+        // Use modern navigation
+        window.location.href = `/blog/categories/${selectedCategory}`;
+      }
+    }
+    
+    public destroy(): void {
+      if (this.selector) {
+        this.selector.removeEventListener('change', this.handleChange.bind(this));
+      }
+    }
+  }
+  
+  // Initialize when component loads
+  const categorySelector = new CategorySelector();
+  
+  // Cleanup on page unload (for SPA navigation)
+  window.addEventListener('beforeunload', () => {
+    categorySelector.destroy();
+  });
+</script>
+
+<style>
+  .category-selector select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+  }
+  
+  .category-selector select:focus {
+    outline: none;
+  }
+  
+  /* Dark mode adjustments */
+  :global(.dark) .category-selector select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%9ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  }
+</style>

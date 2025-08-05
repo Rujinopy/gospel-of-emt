@@ -3,17 +3,25 @@ import { lowerHumanize, upperHumanize } from "@lib/textConverter";
 import { FaRegFolder, FaHashtag } from "react-icons/fa";
 import Button from "@components/common/Button.astro";
 import { ScrollArea } from "@components/common/shortcodes/ScrollArea";
+import CategorySelector from "@components/blog/CategorySelector.astro";
 
 interface Props {
   tags: string[];
   categories: string[];
   allCategories: string[];
+  mobile?: boolean;
 }
 
-const { tags, categories, allCategories }: Props = Astro.props;
+const { tags, categories, allCategories, mobile }: Props = Astro.props;
 ---
-
+{
+  mobile ? (
+    <div class="md:hidden mb-4 px-10 ">
+      <CategorySelector categories={categories} />
+    </div>
+  ) :
 <ScrollArea className="h-full" client:only="react">
+ 
   <!-- categories -->
   <div class="glass rounded-lg p-4 m-2 mb-4 intersect:animate-fadeLeft opacity-0">
     <div>
@@ -45,7 +53,7 @@ const { tags, categories, allCategories }: Props = Astro.props;
     </div>
   </div>
   <!-- tags -->
-  <div class="glass rounded-lg p-4 m-2 intersect:animate-fadeLeft opacity-0">
+  <!-- <div class="glass rounded-lg p-4 m-2 intersect:animate-fadeLeft opacity-0">
     <div>
       <h4 class="mb-2">
         <a href="/blog/tags">
@@ -70,5 +78,5 @@ const { tags, categories, allCategories }: Props = Astro.props;
         }
       </ul>
     </div>
-  </div>
-</ScrollArea>
+  </div> -->
+</ScrollArea>}
