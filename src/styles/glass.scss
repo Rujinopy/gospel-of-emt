@@ -1,26 +1,93 @@
+.neobrutalism-button {
+  @apply bg-white dark:bg-slate-950;
+  @apply border-[1px] border-black dark:border-black;
+  @apply text-black dark:text-white;
+  @apply font-bold;
+  @apply rounded-lg;
+  @apply px-4 py-2;
+  @apply transition-all duration-200 ease-in-out;
+  @apply opacity-100; // Override global a:hover opacity
+  
+  &:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 1);
+    @apply dark:shadow-[4px_4px_0px_rgba(255,255,255,1)];
+    @apply opacity-100; // Maintain full opacity on hover
+  }
+}
+
+.glass-thin { --glass-border-width: 2px; }
+.glass-thick { --glass-border-width: 8px; }
+
 .glass {
-  @apply bg-bg-s dark:bg-darkmode-bg-s;
-  @apply backdrop-blur-lg;
-  @apply bg-clip-padding backdrop-filter backdrop-saturate-100 backdrop-contrast-100;
-  @apply bg-opacity-30 dark:bg-opacity-30;
-  @apply border border-[rgba(255,255,255,0.6)] dark:border-[rgba(255,255,255,0.15)];
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+  // Neo-brutalism glass effect with customizable borders
+  @apply bg-white dark:bg-slate-950 dark:border-slate-800; 
+  
+  // CSS custom properties for customizable borders
+  --glass-border-width: 1px;
+  --glass-border-color: theme('colors.black');
+  --glass-border-color-dark: theme('colors.slate.800');
+  
+  border-width: var(--glass-border-width);
+  border-style: solid;
+  border-color: var(--glass-border-color);
+  
+  @apply dark:border-[color:var(--glass-border-color-dark)];
+  
+  // box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
+  // @apply dark:shadow-[8px_8px_0px_rgba(255,255,255,1)];
+  transform: translate(0, 0);
+  transition: all 0.1s ease;
+
 }
 
 .glass-t {
-  @apply bg-bg-t dark:bg-darkmode-bg-t;
-  @apply bg-opacity-20 dark:bg-opacity-20;
-  @apply backdrop-blur;
-  @apply bg-clip-padding backdrop-filter backdrop-saturate-100 backdrop-contrast-100;
-  @apply border border-[rgba(255,255,255,0.6)] dark:border-[rgba(255,255,255,0.15)];
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+  @apply bg-white dark:bg-slate-950 dark:border-slate-800; 
+  
+  // CSS custom properties for customizable borders
+  --glass-border-width: 1px;
+  --glass-border-color: theme('colors.black');
+  --glass-border-color-dark: theme('colors.slate.800');
+  
+  // Mobile: top border only
+  border-width: var(--glass-border-width) 0 0 0;
+  border-style: solid;
+  border-color: var(--glass-border-color);
+  
+  // Desktop: all sides
+  @apply md:border-[length:var(--glass-border-width)];
+  
+  @apply dark:border-[color:var(--glass-border-color-dark)];
+  
+  transform: translate(0, 0);
+  transition: all 0.1s ease;
+  
+  &:hover {
+    // transform: translate(-2px, -2px);
+    // box-shadow: 10px 10px 0px rgba(0, 0, 0, 1);
+    // @apply dark:shadow-[10px_10px_0px_rgba(255,255,255,1)];
+  }
 }
 
 .glass-t-borderless {
-  @apply bg-bg-t dark:bg-darkmode-bg-t;
-  @apply bg-opacity-20 dark:bg-opacity-20;
-  @apply backdrop-blur;
-  @apply bg-clip-padding backdrop-filter backdrop-saturate-100 backdrop-contrast-100;
+  // Neo-brutalism borderless but with subtle shadow
+  @apply bg-white/70 dark:bg-black/70;
+  backdrop-filter: blur(8px);
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.6);
+  @apply dark:shadow-[4px_4px_0px_rgba(255,255,255,0.6)];
+  transform: translate(0, 0);
+  transition: all 0.1s ease;
+  
+  &:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.7);
+    @apply dark:shadow-[5px_5px_0px_rgba(255,255,255,0.7)];
+  }
+  
+  // @apply bg-bg-t dark:bg-darkmode-bg-t;
+  // @apply bg-opacity-20 dark:bg-opacity-20;
+  // @apply backdrop-blur;
+  // @apply bg-clip-padding backdrop-filter backdrop-saturate-100 backdrop-contrast-100;
 }
 
 // Gradient
@@ -28,4 +95,33 @@
   @apply from-transparent via-transparent to-transparent;
   // @apply from-txt-s via-transparent to-transparent;
   // @apply dark:from-darkmode-txt-s dark:via-transparent dark:to-transparent;
+}
+
+// Neo-brutalism glass with bold borders only at the bottom
+.glass-b{
+  @apply bg-white dark:bg-slate-950 dark:border-slate-800; 
+  
+  // CSS custom properties for customizable borders
+  --glass-border-width: 1px;
+  --glass-border-color: theme('colors.black');
+  --glass-border-color-dark: theme('colors.slate.800');
+  
+  // Mobile: bottom border only
+  border-width: 0 0 var(--glass-border-width) 0;
+  border-style: solid;
+  border-color: var(--glass-border-color);
+  
+  // Desktop: all sides
+  @apply md:border-[length:var(--glass-border-width)];
+  
+  @apply dark:border-[color:var(--glass-border-color-dark)];
+  
+  transform: translate(0, 0);
+  transition: all 0.1s ease;
+  
+  &:hover {
+    // transform: translate(-2px, -2px);
+    // box-shadow: 10px 10px 0px rgba(0, 0, 0, 1);
+    // @apply dark:shadow-[10px_10px_0px_rgba(255,255,255,1)];
+  }
 }

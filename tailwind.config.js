@@ -184,5 +184,20 @@ module.exports = {
     plugin(({ addVariant }) => {
       addVariant("intersect", "&:not([no-intersect])");
     }),
+    // Glass border variants plugin
+    plugin(({ addUtilities }) => {
+      addUtilities({
+        // Border width variants
+        '.glass-thin': {
+          '--glass-border-width': '2px',
+        },
+        '.glass-thick': {
+          '--glass-border-width': '6px',
+        },
+        '.glass-ultra-thick': {
+          '--glass-border-width': '8px',
+        },
+      });
+    }),
   ],
 };
