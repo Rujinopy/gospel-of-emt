@@ -3,30 +3,6 @@ import type { IndexCardsEntry } from "@/types";
 import BaseLayout from "@components/base/BaseLayout.astro";
 import ImageSwiper from "./ImageSwiper";
 
-// Import all the power system images
-import img1 from "@/assets/docs/power-system/1.webp";
-import img2 from "@/assets/docs/power-system/2.webp";
-import img3 from "@/assets/docs/power-system/3.webp";
-import img4 from "@/assets/docs/power-system/4.webp";
-import img5 from "@/assets/docs/power-system/5.webp";
-import img6 from "@/assets/docs/power-system/6.webp";
-import img7 from "@/assets/docs/power-system/7.webp";
-import img8 from "@/assets/docs/power-system/8.webp";
-import img9 from "@/assets/docs/power-system/9.webp";
-import img10 from "@/assets/docs/power-system/10.webp";
-import img11 from "@/assets/docs/power-system/11.webp";
-import img12 from "@/assets/docs/power-system/12.webp";
-import img13 from "@/assets/docs/power-system/13.webp";
-import img14 from "@/assets/docs/power-system/14.webp";
-import img15 from "@/assets/docs/power-system/15.webp";
-import img16 from "@/assets/docs/power-system/16.webp";
-import img17 from "@/assets/docs/power-system/17.webp";
-import img18 from "@/assets/docs/power-system/18.webp";
-import img19 from "@/assets/docs/power-system/19.webp";
-import img20 from "@/assets/docs/power-system/20.webp";
-import img21 from "@/assets/docs/power-system/21.webp";
-import img22 from "@/assets/docs/power-system/22.webp";
-
 interface Props {
   entry: IndexCardsEntry;
 }
@@ -34,13 +10,19 @@ interface Props {
 const { entry } = Astro.props;
 const { title, description } = entry.data;
 
-// Create array of properly imported images
-const processedImages = [
-  img1.src, img2.src, img3.src, img4.src, img5.src, img6.src,
-  img7.src, img8.src, img9.src, img10.src, img11.src, img12.src,
-  img13.src, img14.src, img15.src, img16.src, img17.src, img18.src,
-  img19.src, img20.src, img21.src, img22.src
-];
+// Dynamically import all power system images
+const images = import.meta.glob('/src/assets/docs/power-system/*.webp', { eager: true });
+
+// Extract image sources and sort them numerically
+const processedImages = Object.entries(images)
+  .map(([path, module]) => ({
+    path,
+    src: (module as any).default.src,
+    // Extract number from filename for sorting
+    num: parseInt(path.match(/(\d+)\.webp$/)?.[1] || '0')
+  }))
+  .sort((a, b) => a.num - b.num)
+  .map(img => img.src);
 
 ---
 
