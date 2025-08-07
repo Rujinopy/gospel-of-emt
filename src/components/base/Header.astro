@@ -51,7 +51,7 @@ const menu = [
   transition:persist
   class={`container glass-b lg:mt-4 lg:rounded-lg relative z-50`}
 >
-  <nav class="relative flex flex-wrap items-center justify-between h-14 md:h-auto z-50">
+  <nav class="relative flex flex-wrap items-center justify-between md:h-auto h-14 z-50">
     <!-- navbar toggler -->
     <input id="nav-toggle" type="checkbox" class="hidden" />
     <label
@@ -72,7 +72,7 @@ const menu = [
     <!-- /navbar toggler -->
     <ul
       id="nav-menu"
-      class="text-center lg:text-left order-3 hidden w-full pb-6 md:order-1 md:flex md:w-auto md:space-x-2 md:pb-0 lg:space-x-4"
+      class="text-center lg:text-left order-3 hidden w-screen md:order-1 md:flex md:w-auto md:space-x-2 md:pb-0 lg:space-x-4 md:h-auto h-[40vh]"
     >
       {
         menu.map((item) => (
