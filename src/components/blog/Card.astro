@@ -36,7 +36,7 @@ const entryDescription =
 
 <div class="h-full m-2 pl-0 bg-gradient-to-br gradient rounded-lg">
   <div class="glass h-full rounded-lg p-2 pb-0 intersect:animate-fadeUp opacity-0 ">
-    <h4 class="mb-2 font-notoLooped text-xl">
+    <h4 class="mb-2 font-notoLooped text-[16px] md:text-xl">
       <a href={`/blog/${entry.id}`}>
         {title}
       </a>
@@ -46,7 +46,7 @@ const entryDescription =
         categories && (
           <li class="mr-0 inline-block">
             {categories.map((category: string, index: number) => (
-              <a href={`/blog/categories/${slugify(category)}`}>
+              <a href={`/blog/categories/${slugify(category)}`} class="text-sm">
                 <FaRegFolder className={"ml-2 -mt-1 inline-block"} />
                 {upperHumanize(category)}
               </a>
@@ -68,7 +68,7 @@ const entryDescription =
       )} -->
       {
         entryDate && (
-          <li class="mr-0 inline-block">
+          <li class="mr-0 inline-block text-sm">
             <FaRegCalendarAlt className={"ml-2 -mt-1 inline-block"} />
             {entryDate}
           </li>
