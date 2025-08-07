@@ -1,5 +1,5 @@
 .neobrutalism-button {
-  @apply bg-white dark:bg-slate-950;
+  @apply bg-white dark:bg-[#081014];
   @apply border-[1px] border-black dark:border-black;
   @apply text-black dark:text-white;
   @apply font-bold;
@@ -42,7 +42,7 @@
 }
 
 .glass-t {
-  @apply bg-white dark:bg-slate-950 dark:border-slate-800; 
+  @apply bg-white dark:bg-[#081014] dark:border-slate-800; 
   
   // CSS custom properties for customizable borders
   --glass-border-width: 1px;
@@ -71,7 +71,7 @@
 
 .glass-t-borderless {
   // Neo-brutalism borderless but with subtle shadow
-  @apply bg-white/70 dark:bg-black/70;
+  @apply bg-white/70 dark:bg-[#081014];
   backdrop-filter: blur(8px);
   box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.6);
   @apply dark:shadow-[4px_4px_0px_rgba(255,255,255,0.6)];
@@ -99,7 +99,7 @@
 
 // Neo-brutalism glass with bold borders only at the bottom
 .glass-b{
-  @apply bg-white dark:bg-slate-950 dark:border-slate-800; 
+  @apply bg-white dark:bg-[#081014] dark:border-slate-800; 
   
   // CSS custom properties for customizable borders
   --glass-border-width: 1px;
