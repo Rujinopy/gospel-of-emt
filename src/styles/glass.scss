@@ -21,7 +21,7 @@
 
 .glass {
   // Neo-brutalism glass effect with customizable borders
-  @apply bg-white dark:bg-slate-950 dark:border-slate-800; 
+  @apply bg-white dark:bg-[#081014] dark:bg-opacity-85 dark:border-slate-800; 
   
   // CSS custom properties for customizable borders
   --glass-border-width: 1px;
