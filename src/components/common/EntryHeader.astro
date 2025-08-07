@@ -94,7 +94,7 @@ tags?.sort((a: string, b: string) => a.localeCompare(b));
   {
     showInfo && (
       <div class="glass bg-[#f0e7d5] mb-8 p-4 rounded-lg intersect:animate-fade opacity-0 intersect-no-queue text-center">
-        <h1 set:html={markdownify(title)} class="mb-4 text-3xl" />
+        <h1 set:html={markdownify(title)} class="mb-4 md:text-3xl text-2xl" />
         <ul>
           {author && showAuthor && (
             <li class="mr-1 inline-block">
@@ -140,7 +140,7 @@ tags?.sort((a: string, b: string) => a.localeCompare(b));
               ))}
             </li>
           )}
-          {tags && showTags && (
+          {/* {tags && showTags && (
             <li class="mr-1 inline-block">
               {tags.map((tag: string, index: number) => (
                 <a href={`/blog/tags/${slugify(tag)}`}>
@@ -149,7 +149,7 @@ tags?.sort((a: string, b: string) => a.localeCompare(b));
                 </a>
               ))}
             </li>
-          )}
+          )} */}
         </ul>
       </div>
     )
