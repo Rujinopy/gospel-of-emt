@@ -31,7 +31,7 @@ const {
   title={entryIndex.data.title}
   description={entryIndex.data.description}
 >
-  <div class="px-10 md:px-0 mt-7 lg:mt-0">
+  <div class="px-4 md:px-0 mt-7 lg:mt-0">
     <PageHeader title={entryIndex.data.title} />
   </div>
 
@@ -44,10 +44,10 @@ const {
         mobile={true}
       />
     </div>
-    <div class="flex container">
+    <div class="flex md:container">
       <div class="row px-0 mx-0 w-full">
         <!-- blog posts -->
-        <div class="col-12 lg:col-8 lg:p-0">
+        <div class="md:col-12 lg:col-8 lg:p-0">
           {
             entries.map((entry) => (
               <div class="mb-4">
