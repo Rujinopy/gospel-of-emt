@@ -10,10 +10,46 @@ type Props = {
 
 const { collection, pageIndex = 1, pageCount = 1, pageIDs } = Astro.props;
 
-let pageList: number[] = [];
-for (let i = 1; i <= pageCount; i++) {
-  pageList.push(i);
+// Generate smart pagination with ellipsis
+function getPageNumbers(currentPage: number, totalPages: number, delta: number = 2): (number | string)[] {
+  const range: (number | string)[] = [];
+  
+  // Always show first page
+  range.push(1);
+  
+  // Calculate start and end of middle range
+  const start = Math.max(2, currentPage - delta);
+  const end = Math.min(totalPages - 1, currentPage + delta);
+  
+  // Add ellipsis after first page if needed
+  if (start > 2) {
+    range.push('...');
+  }
+  
+  // Add middle range
+  for (let i = start; i <= end; i++) {
+    if (i !== 1 && i !== totalPages) {
+      range.push(i);
+    }
+  }
+  
+  // Add ellipsis before last page if needed
+  if (end < totalPages - 1) {
+    range.push('...');
+  }
+  
+  // Always show last page (if more than 1 page)
+  if (totalPages > 1) {
+    range.push(totalPages);
+  }
+  
+  return range;
 }
+
+// Use smaller delta on mobile for shorter pagination
+const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+const delta = isMobile ? 1 : 2;
+const pageList = getPageNumbers(pageIndex, pageCount, delta);
 
 let prevPage: string | null;
 let nextPage: string | null;
@@ -44,38 +80,44 @@ if (pageIDs) {
 {
   pageCount > 1 && (
     <nav class="flex items-center justify-center pb-8">
-      <div class="row glass rounded-md p-2 m-2 space-x-2 intersect:animate-fadeUp opacity-0">
+      <div class="row glass rounded-md p-2 m-2 space-x-1 sm:space-x-2 intersect:animate-fadeUp opacity-0">
         {/* previous */}
         {prevPage ? (
           <a
             href={prevPage}
-            class="col rounded px-2 py-1.5 text-txt-p dark:text-darkmode-txt-p"
+            class="col rounded px-1.5 py-1.5 sm:px-2 text-txt-p dark:text-darkmode-txt-p"
             aria-label="Previous"
           >
-            <FaArrowLeft className="inline-block" />
+            <FaArrowLeft className="inline-block text-sm sm:text-base" />
           </a>
         ) : (
           <span
-            class="col rounded px-2 py-1.5 text-txt-light dark:text-darkmode-txt-light"
+            class="col rounded px-1.5 py-1.5 sm:px-2 text-txt-light dark:text-darkmode-txt-light"
             aria-label="Previous"
           >
-            <FaArrowLeft className="inline-block" />
+            <FaArrowLeft className="inline-block text-sm sm:text-base" />
           </span>
         )}
-        {/* page index */}
+        {/* page numbers */}
         {pageIDs ? (
           <div
             aria-current="page"
-            class="col rounded px-4 py-2 text-txt-p  dark:text-darkmode-txt-p"
+            class="col rounded px-2 py-2 sm:px-4 text-txt-p dark:text-darkmode-txt-p text-sm sm:text-base"
           >
             {pageIndex + 1}
           </div>
         ) : (
-          pageList.map((pagination) =>
-            pagination === pageIndex ? (
+          pageList.map((pagination, index) =>
+            typeof pagination === 'string' ? (
+              <span
+                class="col rounded px-2 py-2 sm:px-4 text-txt-light dark:text-darkmode-txt-light cursor-default text-sm sm:text-base"
+              >
+                {pagination}
+              </span>
+            ) : pagination === pageIndex ? (
               <span
                 aria-current="page"
-                class="col rounded px-4 py-2 font-semibold text-txt-p dark:text-darkmode-txt-p border border-txt-light dark:border-darkmode-txt-light"
+                class="col rounded px-2 py-2 sm:px-4 font-semibold text-txt-p dark:text-darkmode-txt-p border border-txt-light dark:border-darkmode-txt-light bg-bg-secondary dark:bg-darkmode-bg-secondary text-sm sm:text-base"
               >
                 {pagination}
               </span>
@@ -87,7 +129,7 @@ if (pageIDs) {
                     : `${collection ? "/" + collection : ""}/page/${pagination}`
                 }
                 aria-current="page"
-                class="col rounded px-4 py-2 font-semibold text-txt-p dark:text-darkmode-txt-p"
+                class="col rounded px-2 py-2 sm:px-4 font-semibold text-txt-p dark:text-darkmode-txt-p hover:bg-bg-secondary dark:hover:bg-darkmode-bg-secondary transition-colors text-sm sm:text-base"
               >
                 {pagination}
               </a>
@@ -99,20 +141,21 @@ if (pageIDs) {
         {nextPage ? (
           <a
             href={nextPage}
-            class="col rounded px-2 py-1.5 text-txt-p dark:text-darkmode-txt-p"
+            class="col rounded px-1.5 py-1.5 sm:px-2 text-txt-p dark:text-darkmode-txt-p"
             aria-label="Next"
           >
-            <FaArrowRight className="inline-block" />
+            <FaArrowRight className="inline-block text-sm sm:text-base" />
           </a>
         ) : (
           <span
-            class="col rounded px-2 py-1.5 text-txt-light dark:text-darkmode-txt-light"
+            class="col rounded px-1.5 py-1.5 sm:px-2 text-txt-light dark:text-darkmode-txt-light"
             aria-label="Next"
           >
-            <FaArrowRight className="inline-block" />
+            <FaArrowRight className="inline-block text-sm sm:text-base" />
           </span>
         )}
       </div>
+      
     </nav>
   )
 }
