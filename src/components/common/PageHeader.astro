@@ -14,7 +14,7 @@ const { title = "" }: Props = Astro.props;
     <div class="rounded-lg p-0 bg-gradient-to-t gradient">
       <div class="rounded-lg px-8 py-6 intersect:animate-fadeDown opacity-0 intersect-no-queue">
         <h2 class="font-notoLooped" set:text={upperHumanize(title)} />
-        <Breadcrumbs className="mt-4" />
+        <Breadcrumbs className="mt-4 md:text-[18px] text-xs" />
       </div>
     </div>
   </div>
