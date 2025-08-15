@@ -1,5 +1,5 @@
 ---
-image: "@assets/astrogon-star.svg"
+image: "@assets/backgrounds/emt.jpg"
 imageAlt: gospel of emt
 title: Gospel of EMT
 content: "แปลเว็บโนเวล Re: ゼロ / Cult of EMT"
