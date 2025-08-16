@@ -1,7 +1,7 @@
 ---
 title: John Doe
 email: johndoe@email.com
-image: "@assets/profile/john-doe.jpg"
+image: "@assets/profile/emt512.png"
 description: This is the description. Just an example of a description, which is bad. A most not good description indeed, but characters on the page.
 social:
   facebook: "https://www.facebook.com/"
