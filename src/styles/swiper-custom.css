@@ -1,0 +1,75 @@
+/* Custom Swiper styles for better mobile experience */
+.image-swiper .swiper {
+  touch-action: pan-y pinch-zoom;
+  overflow: hidden;
+}
+
+.image-swiper .swiper-wrapper {
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.image-swiper .swiper-slide {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  overflow: hidden;
+}
+
+.image-swiper .swiper-zoom-container {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-swiper .swiper-zoom-container img {
+  touch-action: pan-x pan-y pinch-zoom;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: auto;
+}
+
+/* Ensure proper zoom behavior on mobile */
+@media (max-width: 768px) {
+  .image-swiper .swiper-zoom-container {
+    min-height: 100%;
+    width: 100%;
+  }
+  
+  .image-swiper .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .image-swiper .swiper {
+    padding: 0;
+  }
+}
+
+/* Improve navigation button tap targets on mobile */
+@media (max-width: 640px) {
+  .image-swiper nav button {
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+}
+
+/* Prevent iOS Safari bounce when zooming */
+.image-swiper {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Better touch feedback */
+.image-swiper button:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
+}

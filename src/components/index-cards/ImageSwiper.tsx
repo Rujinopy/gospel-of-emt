@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import 'swiper/css';
-import 'swiper/css/effect-fade';
+import "swiper/css";
+import "swiper/css/effect-fade";
+import "swiper/css/zoom";
+import "@/styles/swiper-custom.css";
 
-import { EffectFade } from 'swiper/modules';
+import { EffectFade, Zoom } from "swiper/modules";
 
 import {
   FaArrowLeft,
@@ -40,12 +42,14 @@ const ImageSwiper = ({ images }: Props) => {
   const todayIndex = getTodayIndex();
   const [swiper, setSwiper] = useState<any>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (swiper) {
       swiper.slideTo(0, 0);
       setCurrentIndex(0);
       swiper.on("slideChange", () => setCurrentIndex(swiper.realIndex));
+      setIsLoading(false);
     }
   }, [swiper]);
 
@@ -66,47 +70,68 @@ const ImageSwiper = ({ images }: Props) => {
   }, [swiper]);
 
   return (
-    <div className="image-swiper ">
+    <div className="image-swiper w-full">
+      {isLoading && (
+        <div className="flex items-center justify-center h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh]">
+          <div className="text-txt-p dark:text-darkmode-txt-p">
+            Loading images...
+          </div>
+        </div>
+      )}
       <Swiper
         onSwiper={setSwiper}
         onSlideChange={(s) => setCurrentIndex(s.realIndex)}
         spaceBetween={10}
         slidesPerView={1}
-        modules={[EffectFade]}
+        modules={[EffectFade, Zoom]}
         effect="fade"
+        zoom={{
+          maxRatio: 3,
+          minRatio: 1,
+          toggle: true,
+        }}
+        touchRatio={1}
+        touchAngle={45}
+        simulateTouch={true}
+        allowTouchMove={true}
+        grabCursor={true}
+        preventClicks={false}
+        preventClicksPropagation={false}
+        className={`h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] w-full ${isLoading ? "opacity-0" : "opacity-100"} transition-opacity duration-300`}
+        style={{ visibility: isLoading ? "hidden" : "visible" }}
       >
         {images.map((image, index) => (
-          <SwiperSlide key={index} className="">
-            <div className="md:p-7 w-full lg:w-auto lg:mx-auto lg:max-w-4xl mt-44 lg:mt-0 min-h-64 text-center content-center rounded-lg">
+          <SwiperSlide key={index} className="flex items-center justify-center">
+            <div className="swiper-zoom-container w-full h-full flex items-center justify-center p-2 sm:p-4">
               <img
                 src={image}
                 alt={`Power system diagram ${index + 1}`}
-                className="w-full h-full object-contain rounded-md "
+                className="max-w-full max-h-full object-contain rounded-md cursor-pointer select-none"
                 loading="lazy"
+                draggable={false}
+                onLoad={() => index === 0 && setIsLoading(false)}
               />
-              {/* <p className="mt-2 mb-2 text-sm text-txt-p dark:text-darkmode-txt-p">
-                {index + 1} of {images.length}
-              </p> */}
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
 
-      <nav className="flex justify-center pb-8 mt-5">
-        <div className="glass rounded-lg p-4 mx-2">
-          <div className="flex items-center justify-between gap-6 min-w-64">
+      <nav className="flex justify-center pb-4 sm:pb-8 mt-2 sm:mt-5">
+        <div className="glass rounded-lg p-2 sm:p-4 mx-2">
+          <div className="flex items-center justify-between gap-2 sm:gap-6 min-w-48 sm:min-w-64">
             <button
-              className="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-purple-300 border-black border-[1px] transition-colors cursor-pointer text-txt-p dark:text-darkmode-txt-p hover:text-txt-h dark:hover:text-darkmode-txt-h"
+              className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg hover:bg-purple-300 active:bg-purple-400 border-black border-[1px] transition-colors cursor-pointer text-txt-p dark:text-darkmode-txt-p hover:text-txt-h dark:hover:text-darkmode-txt-h touch-manipulation"
               onClick={() => swiper?.slidePrev()}
               aria-label="Previous image"
+              style={{ minWidth: "44px", minHeight: "44px" }}
             >
-              <FaArrowLeft className="text-sm" />
+              <FaArrowLeft className="text-xs sm:text-sm" />
             </button>
-            
-            <div className="flex items-center gap-2 px-2">
+
+            <div className="flex items-center gap-1 sm:gap-2 px-1 sm:px-2">
               <input
                 type="number"
-                className="w-12 text-center bg-bg-s/30 border border-gray-300 dark:border-darkmode-border/30 rounded px-2 py-1 text-sm text-txt-p dark:text-darkmode-txt-p focus:outline-none focus:border-primary"
+                className="w-10 sm:w-12 text-center bg-bg-s/30 border border-gray-300 dark:border-darkmode-border/30 rounded px-1 sm:px-2 py-1 text-xs sm:text-sm text-txt-p dark:text-darkmode-txt-p focus:outline-none focus:border-primary"
                 min={1}
                 max={images.length}
                 value={currentIndex + 1}
@@ -122,19 +147,27 @@ const ImageSwiper = ({ images }: Props) => {
                 }}
                 aria-label="Jump to image number"
               />
-              <span className="text-txt-p dark:text-darkmode-txt-p text-sm font-medium">
+              <span className="text-txt-p dark:text-darkmode-txt-p text-xs sm:text-sm font-medium">
                 / {images.length}
               </span>
             </div>
 
             <button
-              className="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-purple-300 border-black border-[1px] transition-colors cursor-pointer text-txt-p dark:text-darkmode-txt-p hover:text-txt-h dark:hover:text-darkmode-txt-h"
+              className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg hover:bg-purple-300 active:bg-purple-400 border-black border-[1px] transition-colors cursor-pointer text-txt-p dark:text-darkmode-txt-p hover:text-txt-h dark:hover:text-darkmode-txt-h touch-manipulation"
               onClick={() => swiper?.slideNext()}
               aria-label="Next image"
+              style={{ minWidth: "44px", minHeight: "44px" }}
             >
-              <FaArrowRight className="text-sm" />
+              <FaArrowRight className="text-xs sm:text-sm" />
             </button>
           </div>
+
+          {/* Instructions for mobile zoom */}
+          {/* <div className="mt-2 text-center block sm:hidden">
+            <p className="text-xs text-txt-p dark:text-darkmode-txt-p opacity-70">
+              Pinch to zoom • Double tap to zoom
+            </p>
+          </div> */}
         </div>
       </nav>
     </div>
