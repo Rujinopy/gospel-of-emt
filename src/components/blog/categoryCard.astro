@@ -12,10 +12,10 @@ const {
 
 ---
 
-<div class="h-full m-2 pl-0 bg-gradient-to-br gradient rounded-lg">
-  <div class="glass h-full rounded-lg p-2 pb-0 intersect:animate-fadeUp opacity-0 ">
-    <h4 class=" font-notoLooped text-[16px] md:text-xl">
-      <a href={`/blog/${entry.id}`}>
+<div class="h-full m-2 pl-0 bg-gradient-to-br gradient rounded-lg group cursor-pointer transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-[6px_6px_0px_0px_theme(colors.black)] hover:border-black">
+  <div class="glass h-full rounded-lg p-2 pb-0 intersect:animate-fadeUp opacity-0 group-hover:bg-opacity-90 transition-all duration-100">
+    <h4 class=" font-notoLooped text-[16px] md:text-xl group-hover:font-black group-hover:text-black dark:group-hover:text-white transition-all duration-300">
+      <a href={`/blog/${entry.id}`} class="group-hover:no-underline">
         {title}
       </a>
     </h4>
