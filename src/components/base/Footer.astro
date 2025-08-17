@@ -3,20 +3,23 @@ import Social from "@components/common/Social.astro";
 ---
 
 <footer class="border-black container lg:my-4 lg:rounded-lg intersect:animate-fadeUp opacity-0">
-  <div class="row py-2 lg:py-0 items-center flex-wrap-reverse">
-    <div class="text-center lg:col-6 lg:mb-0 lg:text-left">
+  <div class="row py-2 lg:py-0 items-center flex">
+    <div class="text-center lg:col-4 lg:mb-0 lg:text-left">
       <ul>
         <li class="m-2 inline-block">
           <a href="/">&copy; Gospel of EMT 2025</a>
         </li>
       </ul>
     </div>
-    <div class="text-center lg:col-6 lg:my-0 flex items-center justify-center lg:justify-end">
+    <div class="text-center lg:col-4 lg:my-0 flex items-center justify-center lg:justify-center">
       <Social
         links={{
           facebook: "https://www.facebook.com/profile.php?id=61556960035787",
         }}
       />
+    </div>
+    <div class="text-center lg:col-4 lg:my-0 lg:text-right">
+      <p class="text-sm">made with ❤️ by Rujinopy</p>
     </div>
   </div>
 </footer>
