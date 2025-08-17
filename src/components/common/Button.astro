@@ -3,7 +3,7 @@ interface Props {
   label: string;
   link?: string;
   newtab?: boolean;
-  type?: "primary" | "secondary";
+  type?: "primary" | "secondary" | "neobrutalism" | "invert-neobrutalism";
   color?: string;
   hoverInvert?: boolean;
   glass?: boolean;
@@ -16,19 +16,47 @@ const { label, link, newtab=false, type="primary", color, hoverInvert=false, gla
   <a 
     href={link} 
     target=`${newtab ? "_blank" : ""}`
-    class=`no-underline inline-block hover:opacity-100 ${type == "primary" ? "" : "intersect:animate-fade opacity-0"}`
+    class="no-underline inline-block"
   >
     <div class=`glass-t hover:bg-opacity-20 hover:backdrop-blur-none
-      ${type == "primary" ? "px-4 py-2 rounded-md font-bold intersect:animate-fade opacity-0" : "px-2 py-0.5 rounded-sm text-txt-light dark:text-darkmode-txt-light"}`
+      ${type == "primary" ? "px-4 py-2 rounded-md font-bold" : "px-2 py-0.5 rounded-sm text-txt-light dark:text-darkmode-txt-light"}`
     >
       {label}
+    </div>
+  </a>
+) : type === "neobrutalism" ? (
+  <a 
+    href={link} 
+    target=`${newtab ? "_blank" : ""}`
+    class="no-underline inline-block hover:transform hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_theme(colors.black)] dark:hover:shadow-[4px_4px_0px_0px_theme(colors.white)] transition-all duration-200"
+  >
+    <div class=`px-4 py-2 rounded-md border-2 border-black dark:border-white bg-bg-p dark:bg-darkmode-bg-p
+      ${color ? color : "bg-bg-t dark:bg-darkmode-bg-t"}`
+    >
+      <div class="font-bold text-txt-p dark:text-darkmode-txt-p">
+        {label}
+      </div>
+    </div>
+  </a>
+) : type === "invert-neobrutalism" ? (
+  <a 
+    href={link} 
+    target=`${newtab ? "_blank" : ""}`
+    class="no-underline inline-block transform -translate-y-1 shadow-[4px_4px_0px_0px_theme(colors.black)] dark:shadow-[4px_4px_0px_0px_theme(colors.white)] hover:transform-none hover:shadow-none transition-all duration-200"
+  >
+    <div class=`px-4 py-2 rounded-md border-2 border-black dark:border-white bg-bg-p dark:bg-darkmode-bg-p
+      ${color ? color : "bg-bg-t dark:bg-darkmode-bg-t"}`
+    >
+      <div class="font-bold text-txt-p dark:text-darkmode-txt-p">
+        {label}
+      </div>
     </div>
   </a>
 ) : (
   <a 
     href={link} 
     target=`${newtab ? "_blank" : ""}`
-    class=`no-underline inline-block group intersect:animate-fadeLeft opacity-0 ${hoverInvert ? "hover:opacity-100" : ""}`
+    class="no-underline inline-block group"
   >
   <div class=`
     ${color ? color : "bg-bg-t dark:bg-darkmode-bg-t"}
