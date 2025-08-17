@@ -45,33 +45,31 @@ const { image, imageAlt, title, content, button } = entry.data;
               >
                 Gospel of
                 <span
-                  class="font-bold md:ml-5 peer hover:scale-125 inline-block text-[#A372C3] hover:text-[#B59EF0] md:hover:-translate-y-5 md:hover:translate-x-3 hover:brightness-110 md:hover:rotate-6 transition-all"
+                  class="font-bold md:ml-5 peer hover:scale-125 inline-block text-[#B59EF0] hover:text-[#ab90f0] md:hover:-translate-y-5 md:hover:translate-x-3 hover:brightness-110 md:hover:rotate-6 transition-all"
                 >
                   EMT</span
                 >
                 <img
                   src="/favicon/emt192.png"
                   alt="EMT Favicon"
-                  class="absolute -bottom-80 transition-all peer-hover:visible peer-hover:animate-bounce invisible"
+                  class="absolute -bottom-96 transition-all peer-hover:visible peer-hover:animate-bounce invisible"
                 />
               </h1>
             </div>
             <p
               set:html={markdownify(content)}
-              class="mb-8 glass w-fit text-center mx-auto px-2 py-1 rounded-full"
+              class="mb-8 mt-4 glass w-fit text-center mx-auto px-2 py-1 rounded-full"
             />
           </div>
-          <!-- {
+          {
             button && (
-              <Button
-                label={button.label}
-                link={button.link}
-                newtab
-                hoverInvert
-                color=""
-              />
+              <a href="/blog">
+                <button class="px-4 py-2 rounded-md border hover:bg-[#B59EF0] border-black dark:border-black bg-white dark:bg-[#081014] dark:hover:bg-[#B59EF0] font-bold text-black dark:text-white transform -translate-y-1 shadow-[4px_4px_0px_0px_#B59EF0] dark:shadow-[4px_4px_0px_0px_theme(colors.black)] hover:transform-none hover:shadow-none transition-all duration-200">
+                  อ่านเลย!
+                </button>
+              </a>
             )
-          } -->
+          }
         </div>
       </div>
     </div>
