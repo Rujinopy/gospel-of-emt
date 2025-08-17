@@ -1,7 +1,7 @@
 ---
 title: ' บทนำจากไลท์โนเวลเล่ม 41 "เรื่องเล่าจากความฝันของแม่มด"'
 description: "เรื่องเล่าจากความฝันของแม่มด"
-date: 2024-09-28
+date: 2024-09-30
 image: "@assets/blog/wn9-36-ex.webp"
 imageAlt: re zero webnovel arc9 chapter36 แปลไทย
 categories: [Arc 9]

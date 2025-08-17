@@ -1,7 +1,7 @@
 ---
 title: 'บทนำ "วันวานที่ติดตามดวงดาว" จากไลท์โนเวลเล่ม 40'
 description: "วันวานที่ติดตามดวงดาว"
-date: 2024-09-14
+date: 2024-09-15
 image: "@assets/blog/wn9-23-ex.webp"
 imageAlt: re zero webnovel arc9 chapter23 แปลไทย
 categories: [Arc 9]
