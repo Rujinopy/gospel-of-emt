@@ -3,6 +3,8 @@ import BaseLayout from "@components/base/BaseLayout.astro";
 import { upperHumanize } from "@lib/textConverter";
 import PageHeader from "@components/common/PageHeader.astro";
 import Button from "@components/common/Button.astro";
+import arc8Thumbnail from "@assets/backgrounds/arc8-thumbnail.webp";
+import arc9Thumbnail from "@assets/backgrounds/arc9-thumbnail.webp";
 
 interface Props {
   taxonomy: string;
@@ -11,23 +13,53 @@ interface Props {
 }
 
 const { taxonomy, taxa, allTaxa }: Props = Astro.props;
+
+// Function to add Thai descriptions for specific Arcs
+function getTaxonDisplayText(taxon: string): string {
+  const arcDescriptions: Record<string, string> = {
+    "arc-7": "Arc 7: ดินแดนแห่งหมาป่า",
+    "arc-8": "Arc 8: วินเซนต์ วอลลาเคีย", 
+    "arc-9": "Arc 9: แสงแห่งดวงดาราไร้นาม"
+  };
+  return arcDescriptions[taxon] || upperHumanize(taxon);
+}
+
+// Function to get thumbnail for specific arcs
+function getThumbnail(taxon: string): string | undefined {
+  const thumbnails: Record<string, string> = {
+    "arc-8": arc8Thumbnail.src,
+    "arc-9": arc9Thumbnail.src
+  };
+  return thumbnails[taxon];
+}
 ---
 
 <BaseLayout title={upperHumanize(taxonomy)}>
-  <PageHeader title="หมวดหมู่" />
+  <div class="container mt-7">
+    <PageHeader title="หมวดหมู่" />
+  </div>
   <section class="section">
     <div class="container text-center">
       <ul>
         {
           taxa.map((taxon: string) => {
             const count = allTaxa.filter((c) => c === taxon).length;
+            const thumbnail = getThumbnail(taxon);
             return (
-              <li class="m-3 inline-block">
+              <li class="m-3 inline-block relative">
+                
                 <Button
-                  label=`${upperHumanize(taxon)} (${count})`
+                  label=`${getTaxonDisplayText(taxon)} (${count})`
                   link={`/blog/${taxonomy}/${taxon}`}
                   hoverInvert
                 />
+                {/* {thumbnail && (
+                  <img 
+                    src={thumbnail} 
+                    alt={`${taxon} thumbnail`}
+                    class="h-48 rounded-sm object-cover border border-black shadow-md z-10 mt-4"
+                  />
+                )} */}
               </li>
             );
           })
