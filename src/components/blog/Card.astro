@@ -34,47 +34,52 @@ const entryDescription =
   (autodescription ? plainify(entry.body!.slice(0, descriptionLength)) : null);
 ---
 
-<div class="h-full m-2 pl-0 bg-gradient-to-br gradient rounded-lg group cursor-pointer transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-[6px_6px_0px_0px_theme(colors.black)] hover:border-black">
-  <div class="glass h-full rounded-lg p-2 pb-0 intersect:animate-fadeUp opacity-0 group-hover:bg-opacity-90 transition-all duration-100">
-    <h4 class="mb-2 font-notoLooped text-[16px] md:text-xl group-hover:font-black group-hover:text-black dark:group-hover:text-white transition-all duration-300">
-      <a href={`/blog/${entry.id}`} class="group-hover:no-underline">
+<div
+  class="h-full m-2 pl-0 bg-gradient-to-br gradient rounded-lg group cursor-pointer transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-[6px_6px_0px_0px_theme(colors.black)] hover:border-black"
+>
+  <a href={`/blog/${entry.id}`} class="block h-full">
+    <div
+      class="glass h-full rounded-lg p-2 pb-0 intersect:animate-fadeUp opacity-0 group-hover:bg-opacity-90 transition-all duration-100"
+    >
+      <h4
+        class="mb-2 font-notoLooped text-[16px] md:text-xl group-hover:font-black group-hover:text-black dark:group-hover:text-white transition-all duration-300"
+      >
         {title}
-      </a>
-    </h4>
-    <ul class="mb-2 group-hover:font-bold transition-all duration-300">
-      {
-        categories && (
-          <li class="mr-0 inline-block">
-            {categories.map((category: string, index: number) => (
-              <a href={`/blog/categories/${slugify(category)}`} class="text-sm group-hover:text-black dark:group-hover:text-white group-hover:font-bold transition-all duration-300">
-                <FaRegFolder className={"ml-2 -mt-1 inline-block group-hover:text-black dark:group-hover:text-white transition-all duration-300"} />
-                {upperHumanize(category)}
-              </a>
-            ))}
-          </li>
-        )
-      }
-      <!-- { tags && (
-        <li class="mr-0 inline-block">
-          {
-            tags.map((tag: string, index: number) => (
-              <a href={`/blog/tags/${slugify(tag)}`}>
-                <FaHashtag className={"ml-2 -mt-1 inline-block"} />
-                {lowerHumanize(tag)}
-              </a>
-            ))
-          }
-        </li>
-      )} -->
-      {
-        entryDate && (
-          <li class="mr-0 inline-block text-sm group-hover:text-black group-hover:font-bold transition-all duration-300 dark:group-hover:text-white">
-            <FaRegCalendarAlt className={"ml-2 -mt-1 inline-block group-hover:text-black dark:group-hover:text-white transition-all duration-300"} />
-            {entryDate}
-          </li>
-        )
-      }
-      <!-- {
+      </h4>
+      <ul class="mb-2 group-hover:font-bold transition-all duration-300">
+        {
+          categories && (
+            <li class="mr-0 inline-block">
+              {categories.map((category: string, index: number) => (
+                <span class="text-sm group-hover:text-black dark:group-hover:text-white group-hover:font-bold transition-all duration-300">
+                  <FaRegFolder
+                    className={
+                      "ml-2 -mt-1 inline-block group-hover:text-black dark:group-hover:text-white transition-all duration-300"
+                    }
+                  />
+                  {upperHumanize(category)}
+                </span>
+              ))}
+            </li>
+          )
+        }
+        {
+          entryDate && (
+            <li class="mr-0 inline-block text-sm group-hover:text-black group-hover:font-bold transition-all duration-300 dark:group-hover:text-white">
+              <FaRegCalendarAlt
+                className={
+                  "ml-2 -mt-1 inline-block group-hover:text-black dark:group-hover:text-white transition-all duration-300"
+                }
+              />
+              {entryDate}
+            </li>
+          )
+        }
+      </ul>
+    </div>
+  </a>
+</div>
+<!-- {
         complexity > 0 && (
           <li class="mr-0 inline-block">
             <FaRegClock className={"ml-2 -mt-1 inline-block"} />
@@ -82,9 +87,7 @@ const entryDescription =
           </li>
         )
       } -->
-    </ul>
-    <!-- <p class="">
+
+<!-- <p class="">
       {entryDescription}
     </p> -->
-  </div>
-</div>
