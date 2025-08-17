@@ -8,6 +8,8 @@ import type { BlogEntry } from "@/types";
 import TableOfContents from "@components/common/TableOfContents.astro";
 import { render } from "astro:content";
 import EntryHeader from "@components/common/EntryHeader.astro";
+import { getCollection } from "astro:content";
+
 interface Props {
   entry: BlogEntry;
   relatedEntries: BlogEntry[];
@@ -31,21 +33,22 @@ const entryDescription =
   description ||
   (autodescription ? plainify(entry.body!.slice(0, descriptionLenth)) : null);
 
-// Chapter navigation logic
-const entryId = entry.id;
-const chapterMatch = entryId.match(/^(.+-)(\d+)$/);
-const baseId = chapterMatch ? chapterMatch[1] : null;
-const currentChapter = chapterMatch ? parseInt(chapterMatch[2]) : null;
-const prevChapter = currentChapter ? currentChapter - 1 : null;
-const nextChapter = currentChapter ? currentChapter + 1 : null;
-const prevChapterUrl =
-  baseId && prevChapter && prevChapter > 0
-    ? `/blog/${baseId}${prevChapter}`
-    : null;
-const nextChapterUrl =
-  baseId && nextChapter && nextChapter <= entryLength
-    ? `/blog/${baseId}${nextChapter}`
-    : null;
+// Date-based navigation logic
+const allBlogEntries = await getCollection("blog");
+const sortedEntries = allBlogEntries
+  .filter((blogEntry) => blogEntry.data.date) // Only entries with dates
+  .sort((a, b) => {
+    const dateA = new Date(a.data.date as string | number | Date);
+    const dateB = new Date(b.data.date as string | number | Date);
+    return dateA.getTime() - dateB.getTime();
+  });
+
+const currentIndex = sortedEntries.findIndex((blogEntry) => blogEntry.id === entry.id);
+const prevEntry = currentIndex > 0 ? sortedEntries[currentIndex - 1] : null;
+const nextEntry = currentIndex < sortedEntries.length - 1 ? sortedEntries[currentIndex + 1] : null;
+
+const prevChapterUrl = prevEntry ? `/blog/${prevEntry.id}` : null;
+const nextChapterUrl = nextEntry ? `/blog/${nextEntry.id}` : null;
 ---
 
 <BaseLayout title={title} description={entryDescription} image={image?.src}>
@@ -94,15 +97,15 @@ const nextChapterUrl =
     <!-- <hr /> -->
     <div class="flex items-center justify-center space-x-10">
       {
-        prevChapterUrl && (
-          <a href={prevChapterUrl} class="font-notoLooped neobrutalism-button text-sm md:text-[18px]">
+        prevChapterUrl && prevEntry && (
+          <a href={prevChapterUrl} class="font-notoLooped neobrutalism-button text-sm md:text-[18px]" title={prevEntry.data.title}>
             <FaArrowLeft className="inline-block mr-2" /> ตอนก่อนหน้า
           </a>
         )
       }
       {
-        nextChapterUrl && (
-          <a href={nextChapterUrl} class="font-notoLooped neobrutalism-button text-sm md:text-[18px]">
+        nextChapterUrl && nextEntry && (
+          <a href={nextChapterUrl} class="font-notoLooped neobrutalism-button text-sm md:text-[18px]" title={nextEntry.data.title}>
             ตอนถัดไป
             <FaArrowRight className="inline-block ml-2" />
           </a>
