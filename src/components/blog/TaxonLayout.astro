@@ -40,16 +40,16 @@ const currentEntries = sortedEntries.slice(indexOfFirstEntry, indexOfLastEntry);
 ---
 
 <BaseLayout title={upperHumanize(taxon)}>
-  <div class="flex justify-center items-center px-2 md:px-0 mt-7">
+  <div class="flex justify-center items-center container mt-7">
   <PageHeader title={taxon} />
   </div>
   <section class="section-sm">
     <div class="pb-0">
-      <div class="md:container">
+      <div class="container">
         <div class="row">
           {
             currentEntries.map((entry) => (
-                <div class="py-2 md:py-2 md:col-10">
+                <div class="py-2 md:py-2 md:col-10 ">
                   <CategoryCard entry={entry} />
                   {/* <h4 class="mb-2 font-notoLooped text-[16px]">
                   <a href={`/blog/${entry.id}`}>{entry.data.title}</a>
@@ -60,10 +60,12 @@ const currentEntries = sortedEntries.slice(indexOfFirstEntry, indexOfLastEntry);
         </div>
       </div>
     </div>
-    <Pagination
-      collection={`blog/categories/${slugify(taxon)}`}
-      pageIndex={currentPageIndex}
-      pageCount={pageCount}
-    />
+    <div class="mt-4">
+      <Pagination
+        collection={`blog/categories/${slugify(taxon)}`}
+        pageIndex={currentPageIndex}
+        pageCount={pageCount}
+      />
+    </div>
   </section>
 </BaseLayout>

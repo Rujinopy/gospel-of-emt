@@ -16,7 +16,7 @@ const { tags, categories, allCategories, mobile }: Props = Astro.props;
 ---
 {
   mobile ? (
-    <div class="lg:hidden mb-4 px-5">
+    <div class="lg:hidden mb-4 px-5 md:px-10">
       <CategorySelector categories={categories} />
     </div>
   ) :
