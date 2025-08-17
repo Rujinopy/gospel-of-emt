@@ -89,6 +89,8 @@ module.exports = {
         primary: [fontPrimary, fontPrimaryType],
         secondary: [fontSecondary, fontSecondaryType],
         notoLooped: ["Noto Sans Thai Looped Variable", "sans-serif"],
+        pirata: ["Pirata One", "sans-serif"],
+        pacifico: ["Pacifico", "sans-serif"],
       },
       spacing: {
         "1/2": "50%",

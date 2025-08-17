@@ -19,6 +19,8 @@
     "@astrojs/sitemap": "^3.4.1",
     "@astrojs/tailwind": "^6.0.2",
     "@fontsource-variable/noto-sans-thai-looped": "^5.2.1",
+    "@fontsource/pacifico": "^5.2.6",
+    "@fontsource/pirata-one": "^5.2.6",
     "@radix-ui/react-scroll-area": "^1.1.0",
     "astro": "^5.12.1",
     "astro-auto-import": "^0.4.2",
