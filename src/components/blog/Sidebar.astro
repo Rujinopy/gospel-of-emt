@@ -16,7 +16,7 @@ const { tags, categories, allCategories, mobile }: Props = Astro.props;
 ---
 {
   mobile ? (
-    <div class="lg:hidden mb-4 px-5 md:px-10">
+    <div class="lg:hidden mb-4 px-5 md:px-10" id="mobile-category-container">
       <CategorySelector categories={categories} />
     </div>
   ) :
@@ -80,3 +80,29 @@ const { tags, categories, allCategories, mobile }: Props = Astro.props;
     </div>
   </div> -->
 </ScrollArea>}
+
+<script>
+  // Handle potential timing issues with React ScrollArea and mobile category selector
+  if (typeof window !== 'undefined') {
+    function checkMobileCategorySelector() {
+      const mobileContainer = document.getElementById('mobile-category-container');
+      const categorySelector = document.getElementById('mobile-category-selector');
+      
+      if (mobileContainer && !categorySelector) {
+        console.log('Mobile container found but selector missing, retrying...');
+        // Wait a bit for React component to render
+        setTimeout(checkMobileCategorySelector, 200);
+      }
+    }
+    
+    // Check after initial load and after potential React renders
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(checkMobileCategorySelector, 100);
+    });
+    
+    // Also check when page is fully loaded
+    window.addEventListener('load', () => {
+      setTimeout(checkMobileCategorySelector, 100);
+    });
+  }
+</script>

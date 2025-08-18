@@ -15,6 +15,7 @@ const { categories, className = "" } = Astro.props;
     id="mobile-category-selector"
     class="w-full glass rounded-lg p-3 border border-black dark:border-gray-600 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all font-notoLooped"
     aria-label="เลือกหมวดหมู่"
+    data-category-selector
   >
     <option value="">เลือกหมวดหมู่</option>
     {
@@ -28,16 +29,43 @@ const { categories, className = "" } = Astro.props;
 <script>
   class CategorySelector {
     private selector: HTMLSelectElement | null = null;
+    private boundHandleChange: (event: Event) => void;
+    private retryCount: number = 0;
+    private maxRetries: number = 5;
     
     constructor() {
+      this.boundHandleChange = this.handleChange.bind(this);
       this.init();
     }
     
     private init(): void {
-      this.selector = document.getElementById('mobile-category-selector') as HTMLSelectElement;
+      // Wait for DOM to be ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => this.setupSelector());
+      } else {
+        this.setupSelector();
+      }
+    }
+    
+    private setupSelector(): void {
+      // Try multiple ways to find the selector
+      this.selector = document.getElementById('mobile-category-selector') as HTMLSelectElement ||
+                     document.querySelector('[data-category-selector]') as HTMLSelectElement ||
+                     document.querySelector('.category-selector select') as HTMLSelectElement;
       
       if (this.selector) {
-        this.selector.addEventListener('change', this.handleChange.bind(this));
+        // Remove any existing listeners first (defensive programming)
+        this.selector.removeEventListener('change', this.boundHandleChange);
+        this.selector.addEventListener('change', this.boundHandleChange);
+        console.log('Category selector initialized successfully');
+        this.retryCount = 0; // Reset retry count on success
+      } else if (this.retryCount < this.maxRetries) {
+        console.warn(`Category selector element not found, retrying... (${this.retryCount + 1}/${this.maxRetries})`);
+        this.retryCount++;
+        // Retry after a short delay
+        setTimeout(() => this.setupSelector(), 100);
+      } else {
+        console.error('Category selector element not found after maximum retries');
       }
     }
     
@@ -46,24 +74,77 @@ const { categories, className = "" } = Astro.props;
       const selectedCategory = target.value;
       
       if (selectedCategory) {
-        // Use modern navigation
-        window.location.href = `/blog/categories/${selectedCategory}`;
+        const targetUrl = `/blog/categories/${selectedCategory}`;
+        
+        // Add visual feedback
+        target.style.opacity = '0.7';
+        target.disabled = true;
+        
+        try {
+          console.log(`Navigating to: ${targetUrl}`);
+          
+          // Try modern navigation first
+          if ('navigation' in window && window.navigation) {
+            // Use the new Navigation API if available
+            (window.navigation as any).navigate(targetUrl);
+          } else {
+            // Fallback to window.location.assign for better compatibility
+            window.location.assign(targetUrl);
+          }
+        } catch (error) {
+          console.error('Navigation failed, trying fallback:', error);
+          // Final fallback to href
+          window.location.href = targetUrl;
+        } finally {
+          // Reset visual state after a delay if navigation failed
+          setTimeout(() => {
+            target.style.opacity = '1';
+            target.disabled = false;
+            target.value = ''; // Reset selection
+          }, 3000);
+        }
       }
     }
     
     public destroy(): void {
-      if (this.selector) {
-        this.selector.removeEventListener('change', this.handleChange.bind(this));
+      if (this.selector && this.boundHandleChange) {
+        this.selector.removeEventListener('change', this.boundHandleChange);
+        this.selector = null;
       }
     }
   }
   
   // Initialize when component loads
-  const categorySelector = new CategorySelector();
+  let categorySelector: CategorySelector | null = null;
+  
+  // Initialize with proper timing
+  function initCategorySelector() {
+    if (!categorySelector) {
+      categorySelector = new CategorySelector();
+    }
+  }
+  
+  // Initialize immediately if DOM is ready, otherwise wait
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCategorySelector);
+  } else {
+    initCategorySelector();
+  }
   
   // Cleanup on page unload (for SPA navigation)
   window.addEventListener('beforeunload', () => {
-    categorySelector.destroy();
+    if (categorySelector) {
+      categorySelector.destroy();
+      categorySelector = null;
+    }
+  });
+  
+  // Also cleanup on Astro page transitions (if using View Transitions)
+  document.addEventListener('astro:before-preparation', () => {
+    if (categorySelector) {
+      categorySelector.destroy();
+      categorySelector = null;
+    }
   });
 </script>
 
