@@ -96,20 +96,20 @@ tags?.sort((a: string, b: string) => a.localeCompare(b));
       <div class="glass bg-white mb-8 p-4 rounded-lg intersect:animate-fade opacity-0 intersect-no-queue text-center">
         <h1 set:html={markdownify(title)} class="mb-4 md:text-3xl text-2xl font-notoLooped" />
         <ul>
-          {author && showAuthor && (
+          {/* {author && showAuthor && (
             <li class="mr-1 inline-block">
               <a href={`/authors/${slugify(author.id)}`}>
                 <FaRegUserCircle className={"-mt-1 inline-block"} />
                 {upperHumanize(author.id)}
               </a>
             </li>
-          )}
-          {date && showDate && (
+          )} */}
+          {/* {date && showDate && (
             <li class="mr-1 inline-block">
               <FaRegCalendarAlt className={"ml-2 -mt-1 inline-block"} />
               {formatDate(date)}
             </li>
-          )}
+          )} */}
           {pubDate && showPubDate && (
             <li class="mr-1 inline-block">
               <FaRegCalendarAlt className={"ml-2 -mt-1 inline-block"} />
