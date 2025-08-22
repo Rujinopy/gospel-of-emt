@@ -34,4 +34,10 @@
       @apply m-0; // in .mdx files, li elements can contain <p> tags
     }
   }
+  
+  // Preserve markdown line breaks and formatting exactly as written
+  p {
+    white-space: pre-wrap; // Preserves both line breaks and spaces
+    word-wrap: break-word; // Prevent overflow
+  }
 }
