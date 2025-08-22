@@ -1,7 +1,7 @@
 ---
 title: A Phantom of this Frozen Place
 description: A complete example
-image: "@assets/poetry/phantom-of-this-frozen-place.jpg"
+image: "@assets/blog/wn9-1.webp"
 imageAlt: Snow Leopard on a snowy mountain
 author: jane-doe
 date: 2024-11-11
