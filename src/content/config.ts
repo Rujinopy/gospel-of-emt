@@ -162,6 +162,14 @@ const terms = defineCollection({
   schema: searchable,
 });
 
+const powerSystems = defineCollection({
+  loader: glob({
+    pattern: "**\/[^_]*.{md,mdx}",
+    base: "./src/content/power-systems",
+  }),
+  schema: searchable,
+});
+
 // Export collections
 export const collections = {
   about,
@@ -172,6 +180,7 @@ export const collections = {
   indexCards,
   poetry,
   portfolio,
+  powerSystems,
   recipes,
   terms,
 };
