@@ -10,10 +10,14 @@ const { entry } = Astro.props;
 const { title, image, imageAlt, helperPath } = entry.data;
 ---
 
-
 <div
   class="h-full m-2 pl-0 bg-gradient-to-br gradient rounded-lg intersect:animate-fadeUp opacity-0"
 >
+  <div class="h-14 mb-3 glass rounded-lg flex items-center justify-center">
+    <h4 class="font-notoLooped text-center">
+      {title}
+    </h4>
+  </div>
   <div class="glass h-full rounded-lg">
     <a
       class="group hover:opacity-100"
@@ -32,13 +36,6 @@ const { title, image, imageAlt, helperPath } = entry.data;
             />
           )
         }
-        <div
-          class="glass absolute text-center rounded-lg px-2 py-1 top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]"
-        >
-          <h4 class="font-notoLooped ">
-            {title}
-          </h4>
-        </div>
       </div>
     </a>
   </div>
