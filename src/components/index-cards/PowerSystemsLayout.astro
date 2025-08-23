@@ -26,7 +26,7 @@ const processedImages = Object.entries(images)
   .map(img => img.src);
 
 // Get power system content
-const powerSystemsCollection = await getCollection("powerSystems");
+const powerSystemsCollection = await getCollection("slide");
 const powerSystemsContent = powerSystemsCollection
   .filter(item => item.id.startsWith('system-'))
   .sort((a, b) => {

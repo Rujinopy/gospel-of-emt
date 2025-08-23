@@ -162,12 +162,15 @@ const terms = defineCollection({
   schema: searchable,
 });
 
-const powerSystems = defineCollection({
+const slide = defineCollection({
   loader: glob({
     pattern: "**\/[^_]*.{md,mdx}",
     base: "./src/content/power-systems",
   }),
-  schema: searchable,
+  schema: z.object({
+  title: z.string().optional(),
+  description: z.string().optional(),
+})
 });
 
 // Export collections
@@ -180,7 +183,7 @@ export const collections = {
   indexCards,
   poetry,
   portfolio,
-  powerSystems,
+  slide,
   recipes,
   terms,
 };

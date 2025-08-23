@@ -19,10 +19,10 @@ import {
 type Content = {
   id: string;
   data: {
-    title: string;
-    description: string;
+    title?: string;
+    description?: string;
   };
-  body: string;
+  body?: string;
   collection: string;
 };
 
