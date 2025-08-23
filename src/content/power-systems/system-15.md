@@ -1,9 +1,4 @@
-﻿---
-title: "Power System 15"
-description: "Advanced power system configuration 15"
----
-
-📌 โถงแห่งความทรงจำ (記憶の回廊)
+﻿📌 โถงแห่งความทรงจำ (記憶の回廊)
 
 โถงแห่งความทรงจำคือใจกลางของโอโด ลากูน่า
 

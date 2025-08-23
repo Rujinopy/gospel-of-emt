@@ -1,9 +1,4 @@
-﻿---
-title: "Power System 6"
-description: "Advanced power system configuration 6"
----
-
-📌 มานา (マナ)
+﻿📌 มานา (マナ)
 
 มานาคือพลังงานที่มีอยู่ทุกหนทุกแห่งแต่มองไม่เห็นด้วยตาเปล่า
 
