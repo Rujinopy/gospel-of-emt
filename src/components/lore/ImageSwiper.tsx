@@ -29,6 +29,7 @@ type Content = {
 type Props = {
   images: string[];
   contents?: Content[];
+  loreTitle?: string;
 };
 
 const getTodayIndex = () => {
@@ -50,7 +51,7 @@ const getTodayIndex = () => {
   return dayOfYear + leapYearAdjustment - 1;
 };
 
-const ImageSwiper = ({ images, contents = [] }: Props) => {
+const ImageSwiper = ({ images, contents = [], loreTitle }: Props) => {
   const todayIndex = getTodayIndex();
   const [swiper, setSwiper] = useState<any>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -58,7 +59,7 @@ const ImageSwiper = ({ images, contents = [] }: Props) => {
 
   const currentContent = contents[currentIndex];
   const parsedContent = currentContent?.body
-    ? marked.parse(currentContent.body)
+    ? marked.parse(currentContent.body, { mangle: false, headerIds: false })
     : "";
 
   useEffect(() => {
@@ -124,7 +125,7 @@ const ImageSwiper = ({ images, contents = [] }: Props) => {
                 key={index}
                 className="flex items-center justify-center"
               >
-                <div className="swiper-zoom-container w-full h-full flex items-center justify-center">
+                <div className="swiper-zoom-container w-full h-full flex flex-col space-y-8 items-center justify-center">
                   <img
                     src={image}
                     alt={`${index + 1}`}
@@ -141,7 +142,7 @@ const ImageSwiper = ({ images, contents = [] }: Props) => {
         {/* Text Content Section - Right Side */}
         <div className="font-notoLooped w-full lg:w-2/5 lg:p-0 flex flex-col items-center justify-center ">
           <div
-            className=" glass rounded-lg p-8 text-content-scroll h-[40vh] md:h-[50vh] overflow-y-auto"
+            className=" glass rounded-lg p-8 text-content-scroll h-[40vh] md:h-[70vh] overflow-y-auto"
             style={{
               scrollbarWidth: "thin",
               scrollbarColor: "#9ca3af transparent",
