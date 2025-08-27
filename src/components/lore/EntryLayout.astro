@@ -18,12 +18,12 @@ const { title, description } = entry.data;
 const entryParts = entry.id.split("/");
 const folderName = entryParts[0];
 
-// Import all webp images from the docs directory
-const images = import.meta.glob(`/src/assets/docs/**/*.webp`, { eager: true });
+// Import all webp images from the lore directory
+const images = import.meta.glob(`/src/assets/lore/**/*.webp`, { eager: true });
 
 // Filter and process images for the current entry's folder
 const processedImages = Object.entries(images)
-  .filter(([path]) => path.includes(`/docs/${folderName}/`))
+  .filter(([path]) => path.includes(`/lore/${folderName}/`))
   .map(([path, module]) => ({
     path,
     src: (module as any).default.src,
