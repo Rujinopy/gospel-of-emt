@@ -1,0 +1,38 @@
+---
+import CollectionLayout from "@components/lore/CollectionLayout.astro";
+import { getIndex, getGroups } from "@lib/contentParser";
+import type { DocsEntry, LoreEntry } from "@/types";
+import { sortByTitle } from "@lib/sortFunctions";
+
+
+const collectionIndex = (await getIndex("lore")) as LoreEntry;
+const groupIndices = (await getGroups("lore", sortByTitle)) as LoreEntry[];
+// CollectionIndex It's looking like this:
+// {
+//   id: '-index',
+//   data: {
+//     title: 'Re: Zero Lore',
+//     description: 'This is the docs',
+//     autodescription: true,
+//     draft: false,
+//     imageAlt: '',
+//     hideToc: false,
+//     hideNav: false
+//   },
+//   filePath: 'src/content/docs/-index.md',
+//   digest: 'aceaf96207c2d2cb',
+//   rendered: {
+//     html: '',
+//     metadata: {
+//       headings: [],
+//       localImagePaths: [],
+//       remoteImagePaths: [],
+//       frontmatter: [Object],
+//       imagePaths: []
+//     }
+//   },
+//   collection: 'docs'
+// }
+---
+
+<CollectionLayout entries={groupIndices} collectionIndex={collectionIndex} />

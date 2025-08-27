@@ -1,0 +1,85 @@
+---
+import type { LoreEntry, MenuItem } from "@/types";
+import BaseLayout from "@components/base/BaseLayout.astro";
+import ImageSwiper from "./ImageSwiper";
+import { getCollection, getEntry } from "astro:content";
+
+interface Props {
+  entry: LoreEntry;
+  browserMenu?: MenuItem[];
+}
+
+const { entry } = Astro.props;
+const { title, description } = entry.data;
+
+// Extract the folder path from the entry ID
+// For individual entries like "power-system/system-1" -> "power-system"
+// For index entries like "power-system/-index" -> "power-system"
+const entryParts = entry.id.split("/");
+const folderName = entryParts[0];
+
+// Import all webp images from the docs directory
+const images = import.meta.glob(`/src/assets/docs/**/*.webp`, { eager: true });
+
+// Filter and process images for the current entry's folder
+const processedImages = Object.entries(images)
+  .filter(([path]) => path.includes(`/docs/${folderName}/`))
+  .map(([path, module]) => ({
+    path,
+    src: (module as any).default.src,
+    // Extract number from filename for sorting
+    num: parseInt(path.match(/(\d+)\.webp$/)?.[1] || "0"),
+  }))
+  .sort((a, b) => a.num - b.num)
+  .map((img) => img.src);
+
+// Get all content entries for the current folder to create slide content
+const allLoreEntries = await getCollection("lore");
+const folderEntries = allLoreEntries
+  .filter((loreEntry) => {
+    const loreEntryParts = loreEntry.id.split("/");
+    return (
+      loreEntryParts[0] === folderName &&
+      !loreEntry.id.endsWith("/-index") &&
+      loreEntryParts.length === 2
+    ); // Ensure it's a direct child, not nested deeper
+  })
+  .map((loreEntry) => ({
+    id: loreEntry.id,
+    data: {
+      ...loreEntry.data,
+      // Generate title from filename if not provided
+      title:
+        loreEntry.data.title ||
+        loreEntry.id
+          .split("/")
+          .pop()
+          ?.replace(/\.(md|mdx)$/, "") ||
+        `Entry ${loreEntry.id}`,
+    },
+    body: loreEntry.body,
+    collection: "lore",
+    // Extract number from the entry ID for sorting (more robust pattern)
+    num: parseInt(
+      loreEntry.id.match(/-(\d+)$/)?.[1] ||
+        loreEntry.id.match(/(\d+)$/)?.[1] ||
+        "0",
+    ),
+  }))
+  .sort((a, b) => a.num - b.num);
+
+const slidesContent = folderEntries;
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="flex flex-col container">
+    <div class="w-full flex-1 flex flex-col justify-center py-4 sm:py-8">
+      <ImageSwiper
+        images={processedImages}
+        contents={slidesContent}
+        loreTitle={title}
+        client:load
+      />
+    </div>
+  </div>
+</BaseLayout>
