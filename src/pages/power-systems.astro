@@ -1,9 +1,0 @@
----
-import { getIndex } from "@lib/contentParser";
-import PowerSystemsLayout from "@components/index-cards/PowerSystemsLayout.astro";
-import type { IndexCardsEntry } from "@/types";
-
-const entry = (await getIndex("indexCards")) as IndexCardsEntry;
----
-
-<PowerSystemsLayout entry={entry}/>
