@@ -12,9 +12,11 @@ export const sortByDate = (entries: GenericEntry[]): GenericEntry[] => {
 
 // Sort by title
 export const sortByTitle = (entries: GenericEntry[]): GenericEntry[] => {
-  const sortedEntries = entries.sort((a: any, b: any) =>
-    a.data.title.localeCompare(b.data.title),
-  );
+  const sortedEntries = entries.sort((a: any, b: any) => {
+    const titleA = a.data.title || a.id || '';
+    const titleB = b.data.title || b.id || '';
+    return titleA.localeCompare(titleB);
+  });
   return sortedEntries;
 };
 
