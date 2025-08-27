@@ -1,9 +1,13 @@
 import { getEntry, getCollection, type CollectionKey } from "astro:content";
 import type { GenericEntry } from "@/types";
 
+/* Fetch the index entry for a specific collection */
 export const getIndex = async (collection: CollectionKey): Promise<GenericEntry> => {
   const index = await getEntry(collection, "-index");
-  return index;
+  if (index) {
+    return index;
+  }
+  throw new Error(`Index not found for collection: ${collection}`);
 }
 
 export const getEntries = async (
