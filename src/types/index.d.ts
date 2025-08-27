@@ -7,13 +7,13 @@ export type AboutEntry = CollectionEntry<"about">;
 export type AuthorsEntry = CollectionEntry<"authors">;
 export type BlogEntry = CollectionEntry<"blog">;
 export type DocsEntry = CollectionEntry<"docs">;
+export type LoreEntry = CollectionEntry<"lore">;
 export type HomeEntry = CollectionEntry<"home">;
 export type IndexCardsEntry = CollectionEntry<"indexCards">;
 export type PoetryEntry = CollectionEntry<"poetry">;
 export type PortfolioEntry = CollectionEntry<"portfolio">;
 export type RecipesEntry = CollectionEntry<"recipes">;
 export type TermsEntry = CollectionEntry<"terms">;
-export type SlideEntry = CollectionEntry<"slide">;
 
 export type SearchableEntry =
   | AboutEntry
@@ -22,9 +22,9 @@ export type SearchableEntry =
   | DocsEntry
   | PoetryEntry
   | PortfolioEntry
+  | LoreEntry
   | RecipesEntry
   | TermsEntry
-  | SlideEntry;
 
 export type SocialLinks = {
   discord?: string;
