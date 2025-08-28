@@ -43,6 +43,7 @@ jspm_packages
 
 # Additonal
 .vscode
+.vercel
 .astro
 .idea
 .DS_Store
