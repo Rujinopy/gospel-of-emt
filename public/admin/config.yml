@@ -1,0 +1,233 @@
+backend:
+  name: github
+  repo: Rujinopy/gospel-of-emt
+  branch: decapcms
+
+media_folder: "src/assets/blog"
+public_folder: "@assets/blog"
+
+# Optional: Enable editorial workflow
+publish_mode: editorial_workflow
+
+collections:
+  # Blog Collection
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Auto Description", name: "autodescription", widget: "boolean", default: true }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false }
+      - { label: "Publish Date", name: "date", widget: "datetime", required: false }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Image Alt Text", name: "imageAlt", widget: "string", default: "", required: false }
+      - { label: "Author", name: "author", widget: "relation", collection: "authors", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"], required: false }
+      - { label: "Categories", name: "categories", widget: "list", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Complexity", name: "complexity", widget: "number", default: 1, value_type: "int", min: 1, max: 5 }
+      - { label: "Hide Table of Contents", name: "hideToc", widget: "boolean", default: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  # # Authors Collection
+  # - name: "authors"
+  #   label: "Authors"
+  #   folder: "src/content/authors"
+  #   create: true
+  #   slug: "{{slug}}"
+  #   fields:
+  #     - { label: "Title", name: "title", widget: "string" }
+  #     - { label: "Description", name: "description", widget: "text", required: false }
+  #     - { label: "Auto Description", name: "autodescription", widget: "boolean", default: true }
+  #     - { label: "Draft", name: "draft", widget: "boolean", default: false }
+  #     - { label: "Email", name: "email", widget: "string", required: false }
+  #     - { label: "Profile Image", name: "image", widget: "image", required: false }
+  #     - { label: "Image Alt Text", name: "imageAlt", widget: "string", default: "", required: false }
+  #     - label: "Social Media"
+  #       name: "social"
+  #       widget: "object"
+  #       required: false
+  #       fields:
+  #         - { label: "Discord", name: "discord", widget: "string", required: false }
+  #         - { label: "Email", name: "email", widget: "string", required: false }
+  #         - { label: "Facebook", name: "facebook", widget: "string", required: false }
+  #         - { label: "GitHub", name: "github", widget: "string", required: false }
+  #         - { label: "Instagram", name: "instagram", widget: "string", required: false }
+  #         - { label: "LinkedIn", name: "linkedIn", widget: "string", required: false }
+  #         - { label: "Pinterest", name: "pinterest", widget: "string", required: false }
+  #         - { label: "TikTok", name: "tiktok", widget: "string", required: false }
+  #         - { label: "Website", name: "website", widget: "string", required: false }
+  #         - { label: "YouTube", name: "youtube", widget: "string", required: false }
+  #     - { label: "Body", name: "body", widget: "markdown" }
+
+  # # Lore Collection
+  # - name: "lore"
+  #   label: "Lore"
+  #   folder: "src/content/lore"
+  #   create: true
+  #   slug: "{{slug}}"
+  #   nested:
+  #     depth: 100
+  #   fields:
+  #     - { label: "Title", name: "title", widget: "string", required: false }
+  #     - { label: "Description", name: "description", widget: "text", required: false }
+  #     - { label: "Auto Description", name: "autodescription", widget: "boolean", default: true }
+  #     - { label: "Draft", name: "draft", widget: "boolean", default: false }
+  #     - { label: "Publish Date", name: "pubDate", widget: "datetime", required: false }
+  #     - { label: "Modified Date", name: "modDate", widget: "datetime", required: false }
+  #     - { label: "Featured Image", name: "image", widget: "image", required: false }
+  #     - { label: "Image Alt Text", name: "imageAlt", widget: "string", default: "", required: false }
+  #     - { label: "Hide Table of Contents", name: "hideToc", widget: "boolean", default: false }
+  #     - { label: "Hide Navigation", name: "hideNav", widget: "boolean", default: false }
+  #     - { label: "Helper Path", name: "helperPath", widget: "string", required: false }
+  #     - { label: "Body", name: "body", widget: "markdown" }
+
+  # # Documentation Collection
+  # - name: "docs"
+  #   label: "Documentation"
+  #   folder: "src/content/docs"
+  #   create: true
+  #   slug: "{{slug}}"
+  #   nested:
+  #     depth: 100
+  #   fields:
+  #     - { label: "Title", name: "title", widget: "string" }
+  #     - { label: "Description", name: "description", widget: "text", required: false }
+  #     - { label: "Auto Description", name: "autodescription", widget: "boolean", default: true }
+  #     - { label: "Draft", name: "draft", widget: "boolean", default: false }
+  #     - { label: "Publish Date", name: "pubDate", widget: "datetime", required: false }
+  #     - { label: "Modified Date", name: "modDate", widget: "datetime", required: false }
+  #     - { label: "Featured Image", name: "image", widget: "image", required: false }
+  #     - { label: "Image Alt Text", name: "imageAlt", widget: "string", default: "", required: false }
+  #     - { label: "Hide Table of Contents", name: "hideToc", widget: "boolean", default: false }
+  #     - { label: "Hide Navigation", name: "hideNav", widget: "boolean", default: false }
+  #     - { label: "Helper Path", name: "helperPath", widget: "string", required: false }
+  #     - { label: "Body", name: "body", widget: "markdown" }
+
+  # # Poetry Collection
+  # - name: "poetry"
+  #   label: "Poetry"
+  #   folder: "src/content/poetry"
+  #   create: true
+  #   slug: "{{slug}}"
+  #   fields:
+  #     - { label: "Title", name: "title", widget: "string" }
+  #     - { label: "Description", name: "description", widget: "text", required: false }
+  #     - { label: "Auto Description", name: "autodescription", widget: "boolean", default: true }
+  #     - { label: "Draft", name: "draft", widget: "boolean", default: false }
+  #     - { label: "Date", name: "date", widget: "datetime", required: false }
+  #     - { label: "Featured Image", name: "image", widget: "image", required: false }
+  #     - { label: "Image Alt Text", name: "imageAlt", widget: "string", default: "", required: false }
+  #     - { label: "Author", name: "author", widget: "relation", collection: "authors", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"], required: false }
+  #     - { label: "Body", name: "body", widget: "markdown" }
+
+  # # Recipes Collection
+  # - name: "recipes"
+  #   label: "Recipes"
+  #   folder: "src/content/recipes"
+  #   create: true
+  #   slug: "{{slug}}"
+  #   fields:
+  #     - { label: "Title", name: "title", widget: "string" }
+  #     - { label: "Description", name: "description", widget: "text", required: false }
+  #     - { label: "Auto Description", name: "autodescription", widget: "boolean", default: true }
+  #     - { label: "Draft", name: "draft", widget: "boolean", default: false }
+  #     - { label: "Date", name: "date", widget: "datetime", required: false }
+  #     - { label: "Featured Image", name: "image", widget: "image", required: false }
+  #     - { label: "Image Alt Text", name: "imageAlt", widget: "string", default: "", required: false }
+  #     - { label: "Author", name: "author", widget: "relation", collection: "authors", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"], required: false }
+  #     - { label: "Preparation Time (minutes)", name: "prepTime", widget: "number", required: false }
+  #     - { label: "Servings", name: "servings", widget: "number", required: false }
+  #     - { label: "Diet Type", name: "diet", widget: "string", required: false }
+  #     - label: "Ingredients"
+  #       name: "ingredients"
+  #       widget: "object"
+  #       required: false
+  #       fields:
+  #         - { label: "Ingredient List", name: "list", widget: "list" }
+  #         - { label: "Quantities", name: "qty", widget: "list" }
+  #     - { label: "Instructions", name: "instructions", widget: "list", required: false }
+  #     - { label: "Notes", name: "notes", widget: "list", required: false }
+  #     - { label: "Body", name: "body", widget: "markdown" }
+
+  # # About Page
+  # - name: "about"
+  #   label: "About"
+  #   folder: "src/content/about"
+  #   create: false
+  #   slug: "{{slug}}"
+  #   fields:
+  #     - { label: "Title", name: "title", widget: "string" }
+  #     - { label: "Description", name: "description", widget: "text", required: false }
+  #     - { label: "Auto Description", name: "autodescription", widget: "boolean", default: true }
+  #     - { label: "Draft", name: "draft", widget: "boolean", default: false }
+  #     - { label: "Featured Image", name: "image", widget: "image", required: false }
+  #     - { label: "Image Alt Text", name: "imageAlt", widget: "string", default: "", required: false }
+  #     - { label: "Body", name: "body", widget: "markdown" }
+
+  # Home Page
+  - name: "home"
+    label: "Home"
+    folder: "src/content/home"
+    create: false
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Content", name: "content", widget: "text" }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Image Alt Text", name: "imageAlt", widget: "string", default: "", required: false }
+      - label: "Button"
+        name: "button"
+        widget: "object"
+        required: false
+        fields:
+          - { label: "Label", name: "label", widget: "string" }
+          - { label: "Link", name: "link", widget: "string", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  # # Index Cards
+  # - name: "index-cards"
+  #   label: "Index Cards"
+  #   folder: "src/content/index-cards"
+  #   create: false
+  #   slug: "{{slug}}"
+  #   fields:
+  #     - { label: "Title", name: "title", widget: "string" }
+  #     - { label: "Description", name: "description", widget: "text" }
+  #     - { label: "Body", name: "body", widget: "markdown" }
+
+  # # Portfolio
+  # - name: "portfolio"
+  #   label: "Portfolio"
+  #   folder: "src/content/portfolio"
+  #   create: false
+  #   slug: "{{slug}}"
+  #   fields:
+  #     - { label: "Title", name: "title", widget: "string" }
+  #     - { label: "Description", name: "description", widget: "text", required: false }
+  #     - { label: "Auto Description", name: "autodescription", widget: "boolean", default: true }
+  #     - { label: "Draft", name: "draft", widget: "boolean", default: false }
+  #     - label: "Projects"
+  #       name: "projects"
+  #       widget: "list"
+  #       fields:
+  #         - { label: "Title", name: "title", widget: "string" }
+  #         - { label: "GitHub", name: "github", widget: "string", required: false }
+  #         - { label: "Technologies", name: "technologies", widget: "list", required: false }
+  #         - { label: "Content", name: "content", widget: "list", required: false }
+  #     - { label: "Body", name: "body", widget: "markdown" }
+
+  # # Terms
+  # - name: "terms"
+  #   label: "Terms"
+  #   folder: "src/content/terms"
+  #   create: false
+  #   slug: "{{slug}}"
+  #   fields:
+  #     - { label: "Title", name: "title", widget: "string" }
+  #     - { label: "Description", name: "description", widget: "text", required: false }
+  #     - { label: "Auto Description", name: "autodescription", widget: "boolean", default: true }
+  #     - { label: "Draft", name: "draft", widget: "boolean", default: false }
+  #     - { label: "Body", name: "body", widget: "markdown" }

@@ -10,6 +10,8 @@ import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import cloudflare from "@astrojs/cloudflare";
 
+import vercel from "@astrojs/vercel";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://gospelofemt.com",
@@ -18,7 +20,7 @@ export default defineConfig({
   prefetch: {
     prefetchAll: true
   },
-  adapter: cloudflare(),
+  adapter: vercel(),
   integrations: [react(), sitemap(), tailwind({
     config: {
       applyBaseStyles: false
