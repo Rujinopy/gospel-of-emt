@@ -8,7 +8,7 @@ import remarkCollapse from "remark-collapse";
 import remarkToc from "remark-toc";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
-import cloudflare from "@astrojs/cloudflare";
+import decapCmsOauth from "astro-decap-cms-oauth";
 
 import vercel from "@astrojs/vercel";
 
@@ -21,7 +21,7 @@ export default defineConfig({
     prefetchAll: true
   },
   adapter: vercel(),
-  integrations: [react(), sitemap(), tailwind({
+  integrations: [ decapCmsOauth() ,react(), sitemap(), tailwind({
     config: {
       applyBaseStyles: false
     }

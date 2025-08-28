@@ -25,6 +25,7 @@
     "@radix-ui/react-scroll-area": "^1.1.0",
     "astro": "^5.12.1",
     "astro-auto-import": "^0.4.2",
+    "astro-decap-cms-oauth": "^0.5.1",
     "astro-tooltips": "^0.6.2",
     "clsx": "^2.1.1",
     "date-fns": "^2.30.0",
