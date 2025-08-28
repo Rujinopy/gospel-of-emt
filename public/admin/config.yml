@@ -2,6 +2,10 @@ backend:
   name: github
   repo: Rujinopy/gospel-of-emt
   branch: decapcms
+  site_domain: gospel-of-emt-git-decapcms-rujinopys-projects.vercel.app
+  base_url: https://gospel-of-emt-git-decapcms-rujinopys-projects.vercel.app
+  auth_endpoint: oauth
+
 
 media_folder: "src/assets/blog"
 public_folder: "@assets/blog"
