@@ -21,7 +21,9 @@ export default defineConfig({
     prefetchAll: true
   },
   adapter: vercel(),
-  integrations: [ decapCmsOauth() ,react(), sitemap(), tailwind({
+  integrations: [ decapCmsOauth({
+    decapCMSSrcUrl: "https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js",
+  }) ,react(), sitemap(), tailwind({
     config: {
       applyBaseStyles: false
     }
