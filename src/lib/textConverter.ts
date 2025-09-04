@@ -38,6 +38,7 @@ export const mapCategoryName = (category: string): string => {
     "ayamatsu": "Ayamatsu: รูทเย่อหยิ่ง",
     "mimagau": "Mimagau: รูทสลับเพศ",
     "oboberu": "Oboberu: รูทโทสะ",
+    "ex5": "นิยายสปินออฟ EX5 \"ตำนานเจ้าหญิงสีชาด\""
   };
   return arcDescriptions[category] || upperHumanize(category);
 }
