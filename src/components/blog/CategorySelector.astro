@@ -1,5 +1,5 @@
 ---
-import { upperHumanize } from "@lib/textConverter";
+import { mapCategoryName, upperHumanize } from "@lib/textConverter";
 
 interface Props {
   categories: string[];
@@ -20,7 +20,7 @@ const { categories, className = "" } = Astro.props;
     <option value="">เลือกหมวดหมู่</option>
     {
       categories.map((category) => (
-        <option value={category}>{upperHumanize(category)}</option>
+        <option value={category}>{mapCategoryName(category)}</option>
       ))
     }
   </select>

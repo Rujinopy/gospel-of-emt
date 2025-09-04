@@ -24,6 +24,24 @@ export const upperHumanize = (content: string) => {
     .replace(/(^\w{1})|(\s{1}\w{1})/g, (match) => match.toUpperCase());
 };
 
+export const humanize = (content: string) => {
+  return content
+    .replace(/-/g, " ")
+    .replace(/(^\w{1})|(\s{1}\w{1})/g, (match) => match.toUpperCase());
+};
+
+export const mapCategoryName = (category: string): string => {
+  const arcDescriptions: Record<string, string> = {
+    "arc-7": "Arc 7: ดินแดนแห่งหมาป่า",
+    "arc-8": "Arc 8: วินเซนต์ วอลลาเคีย", 
+    "arc-9": "Arc 9: แสงแห่งดวงดาราไร้นาม",
+    "ayamatsu": "Ayamatsu: รูทเย่อหยิ่ง",
+    "mimagau": "Mimagau: รูทสลับเพศ",
+    "oboberu": "Oboberu: รูทโทสะ",
+  };
+  return arcDescriptions[category] || upperHumanize(category);
+}
+
 // hyphen to space, lowercase all letters
 export const lowerHumanize = (content: string) => {
   return content

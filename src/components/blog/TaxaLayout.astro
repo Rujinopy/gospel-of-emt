@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "@components/base/BaseLayout.astro";
-import { upperHumanize } from "@lib/textConverter";
+import { mapCategoryName, upperHumanize } from "@lib/textConverter";
 import PageHeader from "@components/common/PageHeader.astro";
 import Button from "@components/common/Button.astro";
 import arc8Thumbnail from "@assets/backgrounds/arc8-thumbnail.webp";
@@ -13,17 +13,6 @@ interface Props {
 }
 
 const { taxonomy, taxa, allTaxa }: Props = Astro.props;
-
-// Function to add Thai descriptions for specific Arcs
-function getTaxonDisplayText(taxon: string): string {
-  const arcDescriptions: Record<string, string> = {
-    "arc-7": "Arc 7: ดินแดนแห่งหมาป่า",
-    "arc-8": "Arc 8: วินเซนต์ วอลลาเคีย", 
-    "arc-9": "Arc 9: แสงแห่งดวงดาราไร้นาม",
-    "ayamatsu": "Ayamatsu: รูทเย่อหยิ่ง"
-  };
-  return arcDescriptions[taxon] || upperHumanize(taxon);
-}
 
 // Function to get thumbnail for specific arcs
 function getThumbnail(taxon: string): string | undefined {
@@ -50,7 +39,7 @@ function getThumbnail(taxon: string): string | undefined {
               <li class="m-3 inline-block relative">
                 
                 <Button
-                  label=`${getTaxonDisplayText(taxon)} (${count})`
+                  label=`${mapCategoryName(taxon)} (${count})`
                   link={`/blog/${taxonomy}/${taxon}`}
                   hoverInvert
                 />

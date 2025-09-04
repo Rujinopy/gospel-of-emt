@@ -1,5 +1,5 @@
 ---
-import { lowerHumanize, upperHumanize } from "@lib/textConverter";
+import { lowerHumanize, upperHumanize, humanize, mapCategoryName } from "@lib/textConverter";
 import { FaRegFolder, FaHashtag } from "react-icons/fa";
 import Button from "@components/common/Button.astro";
 import { ScrollArea } from "@components/common/shortcodes/ScrollArea";
@@ -42,7 +42,7 @@ const { tags, categories, allCategories, mobile }: Props = Astro.props;
                   class=""
                   href={`/blog/categories/${category}`}
                 >
-                  {upperHumanize(category)}{" "}
+                  {mapCategoryName(category)}{" "}
                   <div class="inline-block pl-1">({count})</div>
                 </a>
               </li>
