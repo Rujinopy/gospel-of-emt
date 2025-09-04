@@ -9,6 +9,7 @@ import Background from "@/components/base/Background.astro";
 import { Tooltips } from "astro-tooltips";
 // Supports weights 100-900
 import '@fontsource-variable/noto-sans-thai-looped';
+import Analytics from '@vercel/analytics/astro'
 
 // types for frontmatters
 export interface Props {
@@ -134,6 +135,7 @@ const baseUrl = "https://gospel-of-emt.vercel.app";
     <Tooltips interactive={false} delay={[333, 0]} />
   </head>
   <body>
+    <Analytics/>
     <div class="">
      <Background /> 
     </div>
