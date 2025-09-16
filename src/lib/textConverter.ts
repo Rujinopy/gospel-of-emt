@@ -32,6 +32,7 @@ export const humanize = (content: string) => {
 
 export const mapCategoryName = (category: string): string => {
   const arcDescriptions: Record<string, string> = {
+    "arc-6": "Arc 6: โถงแห่งความทรงจำ",
     "arc-7": "Arc 7: ดินแดนแห่งหมาป่า",
     "arc-8": "Arc 8: วินเซนต์ วอลลาเคีย", 
     "arc-9": "Arc 9: แสงแห่งดวงดาราไร้นาม",
@@ -40,6 +41,7 @@ export const mapCategoryName = (category: string): string => {
     "oboberu": "Oboberu: รูทโทสะ",
     "ex5": "นิยายสปินออฟ EX5 \"ตำนานเจ้าหญิงสีชาด\"",
     "tsugihagu": "Tsugihagu: รูทตะกละ",
+    "azamuku": "Azamuku: รูทหลอกลวง",
   };
   return arcDescriptions[category] || upperHumanize(category);
 }
