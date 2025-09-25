@@ -3,7 +3,7 @@ title: 'บทนำไลท์โนเวล Re: zero เล่ม 42 "คำ
 description: "คำอวยพรของแม่มด"
 date: 2024-10-14
 image: "@assets/blog/wn9-49-ex.webp"
-imageAlt: webnovel arc9 chapter1
+imageAlt: re zero webnovel arc9 chapter49ex แปลไทย
 categories: [Arc 9]
 author: admin
 hideToc: true
