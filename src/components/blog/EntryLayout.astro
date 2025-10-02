@@ -54,6 +54,23 @@ const nextChapterUrl = nextEntry ? `/blog/${nextEntry.id}` : null;
 <BaseLayout title={title} description={entryDescription} image={image?.src}>
   <section class="flex md:container md:p-4 p-2">
     <div class=`w-full ${actuallyHideToc ? "" : "md:col-9"}`>
+      <div class="flex items-center justify-between space-x-10">
+      {
+        prevChapterUrl && prevEntry && (
+          <a href={prevChapterUrl} class="font-notoLooped neobrutalism-button text-sm md:text-[18px]" title={prevEntry.data.title}>
+            <FaArrowLeft className="inline-block mr-2" /> ตอนก่อนหน้า
+          </a>
+        )
+      }
+      {
+        nextChapterUrl && nextEntry && (
+          <a href={nextChapterUrl} class="font-notoLooped neobrutalism-button text-sm md:text-[18px]" title={nextEntry.data.title}>
+            ตอนถัดไป
+            <FaArrowRight className="inline-block ml-2" />
+          </a>
+        )
+      }
+    </div>
       <article class="">
         <section>
           <EntryHeader
