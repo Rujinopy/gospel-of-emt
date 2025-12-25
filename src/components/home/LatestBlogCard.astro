@@ -19,12 +19,12 @@ const entryDate = date ? formatDate(date) : null;
 >
   {/* Floating Image - appears on hover */}
   {image && (
-    <div class="absolute right-0 -top-0 opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none z-10 group-hover:-top-64">
+    <div class="absolute right-0 -top-0 opacity-0 md:group-hover:opacity-100 transition-all duration-300 pointer-events-none  group-hover:-top-64">
       <div class="relative w-48 h-48 xl:w-64 xl:h-64">
         <Image
           src={image}
           alt={imageAlt || title}
-          class="w-full h-full object-cover rounded-lg shadow-2xl"
+          class="w-full h-full object-cover rounded-lg shadow-2xl z-[0]"
           width={500}
           height={500}
         />

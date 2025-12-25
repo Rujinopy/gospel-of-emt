@@ -63,12 +63,12 @@ const CategoryFilterTabs: React.FC<Props> = ({ categories, postsByCategory }) =>
               </div> */}
             
               {/* Card - Matching LatestBlogCard Style */}
-              <div className="group h-full rounded-lg overflow-visible transition-all duration-300 hover:transform hover:translate-y-4 hover:shadow-[6px_6px_0px_0px_black] border border-black">
+              <div className="group h-full rounded-lg overflow-visible transition-all duration-300 hover:transform hover:translate-y-4 hover:shadow-[6px_6px_0px_0px_black] border border-slate-800">
                 <a href={`/blog/${post.id}`} className="block h-full">
                   <div className=" bg-white/70 dark:bg-black/70 h-full rounded-lg ">  
 
                   {post.data.image && (
-                      <div className="absolute right-0 -top-0 opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none z-10 group-hover:-top-64">
+                      <div className="absolute right-0 -top-0 opacity-0 md:group-hover:opacity-100 transition-all duration-300 pointer-events-none z-10 group-hover:-top-64">
                         <div className="relative w-48 h-48 xl:w-64 xl:h-64">
                           <img
                             src={post.data.image.src}
