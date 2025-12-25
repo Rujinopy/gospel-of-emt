@@ -2,8 +2,12 @@
 import BaseLayout from "@components/base/BaseLayout.astro";
 import { markdownify } from "@lib/textConverter";
 import Button from "@components/common/Button.astro";
-import type { HomeEntry } from "@/types";
+import type { HomeEntry, BlogEntry } from "@/types";
 import { Image } from "astro:assets";
+import ArcSection from "./ArcSection.astro";
+import WhatIfSection from "./WhatIfSection.astro";
+import { getEntries } from "@lib/contentParser";
+import { sortByDate } from "@lib/sortFunctions";
 
 interface Props {
   entry: HomeEntry;
@@ -11,6 +15,46 @@ interface Props {
 
 const { entry } = Astro.props;
 const { image, imageAlt, title, content, button } = entry.data;
+
+// Fetch all blog posts
+const allBlogPosts = (await getEntries("blog", sortByDate)) as BlogEntry[];
+
+// Helper function to filter posts by category
+const filterByCategory = (posts: BlogEntry[], category: string) => {
+  return posts.filter(
+    (post) =>
+      post.data.categories && post.data.categories.includes(category)
+  );
+};
+
+// Get Arc posts (first 5 of each arc) - sorted oldest first
+const arc6Posts = filterByCategory(allBlogPosts, "Arc 6")
+  .sort((a, b) => new Date(a.data.date || 0).valueOf() - new Date(b.data.date || 0).valueOf())
+  .slice(0, 4);
+const arc7Posts = filterByCategory(allBlogPosts, "Arc 7")
+  .sort((a, b) => new Date(a.data.date || 0).valueOf() - new Date(b.data.date || 0).valueOf())
+  .slice(0, 4);
+const arc8Posts = filterByCategory(allBlogPosts, "Arc 8")
+  .sort((a, b) => new Date(a.data.date || 0).valueOf() - new Date(b.data.date || 0).valueOf())
+  .slice(0, 4);
+const arc9Posts = filterByCategory(allBlogPosts, "Arc 9")
+  .sort((a, b) => new Date(a.data.date || 0).valueOf() - new Date(b.data.date || 0).valueOf())
+  .slice(0, 4);
+
+// Get What-IF posts by categories - sorted oldest first
+const whatIfCategories = [
+  { name: "Ayamatsu", slug: "Ayamatsu", displayName: "เย่อหยิ่ง (Pride)" },
+  { name: "Oboberu", slug: "Oboberu", displayName: "โกรธแค้น (Wrath)" },
+  { name: "Tsugihagu", slug: "Tsugihagu", displayName: "ตะกละ (Glutt)" },
+  { name: "Mimagau", slug: "Mimagau", displayName: "สลับเพศ (Mima)" },
+];
+
+const whatIfPostsByCategory = whatIfCategories.reduce((acc, category) => {
+  acc[category.slug] = filterByCategory(allBlogPosts, category.name)
+    .sort((a, b) => new Date(a.data.date || 0).valueOf() - new Date(b.data.date || 0).valueOf())
+    .slice(0, 4);
+  return acc;
+}, {} as Record<string, BlogEntry[]>);
 ---
 
 <BaseLayout>
@@ -19,54 +63,31 @@ const { image, imageAlt, title, content, button } = entry.data;
     <div class="container">
       <div class="row justify-center">
         <div class="text-center lg:col-6">
-          <!-- {
-            image && (
-              <div class="blur-[0px]">
-                <Image
-                class="mb-6 w-64"
-                src={image}
-                alt={imageAlt}
-                width={1024}
-                height={1024}
-                loading="eager"
-              />
-              </div>
-              
-            )
-          } -->
-          <!-- <h1 set:html={markdownify(title)} class="mb-4 hover:scale-150 transition-all duration-300"
-          
-          
-          /> -->
-          <div class="md:mt-20 mx-auto">
-            <div class="relative flex flex-col">
-              <h1
-                class="font-semibold text-6xl mb-2 md:px-0 px-16 mx-auto text-center flex justify-center items-center flex-col md:flex-row"
-              >
+          <div class="md:mt-6 mx-auto">
+            {/* Logo */}
+            <div class="flex items-center justify-center gap-2 mb-6">
+              <!-- <span class="font-semibold text-2xl md:text-4xl text-txt-p dark:text-darkmode-txt-p">
                 Gospel of
-                <span
-                  class="md:ml-5 peer hover:scale-125 inline-block text-[#ae86c9] 
-                  hover:text-[#ab90f0] md:hover:-translate-y-5 md:hover:translate-x-3 hover:brightness-110 md:hover:rotate-6 transition-all"
-                >
-                  EMT</span
-                >
-                <img
-                  src="/favicon/emt192.png"
-                  alt="EMT Favicon"
-                  class="absolute -bottom-96 transition-all peer-hover:visible peer-hover:animate-bounce invisible"
-                />
-              </h1>
+              </span>
+              <span class="text-2xl md:text-4xl text-[#ae86c9] font-semibold">
+                EMT
+              </span> -->
+              <img
+                src="/favicon/emt192.png"
+                alt="EMT"
+                class="w-32 h-32 md:w-48 md:h-48"
+              />
             </div>
             <p
               set:html={markdownify(content)}
-              class="mb-8 mt-4 glass w-fit text-center mx-auto px-2 py-1 rounded-full"
+              class="mb-8 mt-4 glass w-fit text-center mx-auto px-4 py-2 rounded-full md:text-2xl "
             />
           </div>
           {
             button && (
               <a href="/blog">
                 <button class="px-4 py-2 rounded-md border hover:bg-[#B59EF0] border-black dark:border-black bg-white dark:bg-[#081014] dark:hover:bg-[#B59EF0] font-bold text-black dark:text-white transform -translate-y-1 shadow-[4px_4px_0px_0px_#B59EF0] dark:shadow-[4px_4px_0px_0px_theme(colors.black)] hover:transform-none hover:shadow-none transition-all duration-200">
-                  อ่านเลย!
+                  ดูทั้งหมด &rarr;
                 </button>
               </a>
             )
@@ -75,4 +96,39 @@ const { image, imageAlt, title, content, button } = entry.data;
       </div>
     </div>
   </section>
+
+  <!-- Arc Sections -->
+  <ArcSection
+    title="Arc 6: โถงแห่งความทรงจำ"
+    posts={arc6Posts}
+    categorySlug="arc-6"
+    rankStart={1}
+  />
+  
+  <ArcSection
+    title="Arc 7: ดินแดนแห่งหมาป่า"
+    posts={arc7Posts}
+    categorySlug="arc-7"
+    rankStart={1}
+  />
+  
+  <ArcSection
+    title="Arc 8: วินเซนต์ วอลลาเคีย"
+    posts={arc8Posts}
+    categorySlug="arc-8"
+    rankStart={1}
+  />
+  
+  <ArcSection
+    title="Arc 9: แสงแห่งดวงดาราไร้นาม"
+    posts={arc9Posts}
+    categorySlug="arc-9"
+    rankStart={1}
+  />
+
+  <!-- What-IF Section with Category Filter -->
+  <WhatIfSection
+    whatIfCategories={whatIfCategories}
+    postsByCategory={whatIfPostsByCategory}
+  />
 </BaseLayout>

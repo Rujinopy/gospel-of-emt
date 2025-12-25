@@ -1,0 +1,63 @@
+---
+import type { BlogEntry } from "@/types";
+import CategoryFilterTabs from "./CategoryFilterTabs";
+
+interface Props {
+  whatIfCategories: Array<{
+    name: string;
+    slug: string;
+    displayName: string;
+  }>;
+  postsByCategory: Record<string, BlogEntry[]>;
+}
+
+const { whatIfCategories, postsByCategory } = Astro.props;
+
+// Serialize posts for client-side component
+const serializedPosts = Object.fromEntries(
+  Object.entries(postsByCategory).map(([key, posts]) => [
+    key,
+    posts.map((post) => ({
+      id: post.id,
+      data: {
+        title: post.data.title,
+        imageAlt: post.data.imageAlt,
+        image: post.data.image
+          ? {
+              src: post.data.image.src,
+              width: post.data.image.width,
+              height: post.data.image.height,
+            }
+          : null,
+      },
+    })),
+  ]),
+);
+---
+
+<section class="md:px-0 px-2 flex flex-col gap-2 md:gap-4 mb-8">
+  <div
+    class="container bg-white dark:bg-inherit p-5 md:p-8 rounded-lg shadow-lg border border-black dark:border-slate-600"
+  >
+    <div class="flex justify-between items-center mb-3 md:mb-6">
+      <h2
+        class="font-notoLooped text-base md:text-3xl py-2 md:py-3 from-[#B59EF0] to-[#ae86c9] w-fit px-3 md:px-5 rounded-md"
+      >
+        What-IF
+      </h2>
+      <a
+        href="/blog/categories/what-if"
+        class="text-sm md:text-base hover:text-[#B59EF0] transition-colors font-notoLooped"
+      >
+        ดูทั้งหมด →
+      </a>
+    </div>
+    <div class="px-3 md:px-5">
+      <CategoryFilterTabs
+        client:load
+        categories={whatIfCategories}
+        postsByCategory={serializedPosts}
+      />
+    </div>
+  </div>
+</section>

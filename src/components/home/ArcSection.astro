@@ -1,0 +1,48 @@
+---
+import type { BlogEntry } from "@/types";
+import LatestBlogCard from "./LatestBlogCard.astro";
+
+interface Props {
+  title: string;
+  posts: BlogEntry[];
+  categorySlug: string;
+  rankStart?: number;
+}
+
+const { title, posts, categorySlug, rankStart = 1 } = Astro.props;
+---
+
+<section class="md:px-0 px-2 flex flex-col gap-2 md:gap-4 mb-8">
+  <div class="container bg-white dark:bg-inherit p-5 md:p-8 rounded-lg shadow-lg border border-black dark:border-slate-600">
+    <div class="flex justify-between items-center mb-3 md:mb-6">
+      <h2
+        class="font-notoLooped text-base md:text-3xl py-2 md:py-3 from-[#B59EF0] to-[#ae86c9] w-fit px-3 md:px-5 rounded-md"
+      >
+        {title}
+      </h2>
+      <a
+        href={`/blog/categories/${categorySlug}`}
+        class="text-sm md:text-base hover:text-[#B59EF0] transition-colors font-notoLooped"
+      >
+        ดูทั้งหมด →
+      </a>
+    </div>
+
+    <!-- Mobile: Horizontal scroll, Desktop: Grid -->
+    <div class="overflow-x-auto overflow-y-hidden md:overflow-visible -mx-4 md:mx-0">
+      <div class="flex md:grid gap-3 md:gap-4 px-4 md:px-0 md:grid-cols-3 lg:grid-cols-4">
+        {
+          posts.map((post, index) => (
+            <div class="relative flex-shrink-0 w-[140px] md:w-auto">
+              {/* Rank Badge */}
+              {/* <div class="absolute -top-2 -left-2 z-10 bg-[#B59EF0] text-white font-bold rounded-full w-7 h-7 md:w-8 md:h-8 flex items-center justify-center text-xs md:text-sm shadow-lg">
+                {rankStart + index}
+              </div> */}
+              <LatestBlogCard entry={post} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

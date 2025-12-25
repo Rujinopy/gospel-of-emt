@@ -1,0 +1,39 @@
+---
+import type { BlogEntry } from "@/types";
+import LatestBlogCard from "./LatestBlogCard.astro";
+
+interface Props {
+  posts: BlogEntry[];
+}
+
+const { posts } = Astro.props;
+---
+
+<section class="section py-16 ">
+  <div class="container">
+    <div class="mb-12 text-center">
+      <h2
+        class="font-notoLooped border border-black text-xl md:text-3xl mb-3 py-3 from-[#B59EF0] to-[#ae86c9] bg-white w-fit px-5 mx-auto rounded-3xl"
+      >
+        อัพเดท
+      </h2>
+      <!-- <p class="text-lg opacity-80 bg-white w-fit px-5 mx-auto rounded-3xl">
+        อัปเดตล่าสุดจากคอลเลกชัน
+      </p> -->
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {posts.map((post) => <LatestBlogCard entry={post} />)}
+    </div>
+
+    <div class="mt-12 text-center">
+      <a href="/blog">
+        <button
+          class="px-6 py-3 rounded-md border hover:bg-[#B59EF0] border-black dark:border-black bg-white dark:bg-[#081014] dark:hover:bg-[#B59EF0] font-bold text-black dark:text-white transform -translate-y-1 shadow-[4px_4px_0px_0px_#B59EF0] dark:shadow-[4px_4px_0px_0px_theme(colors.black)] hover:transform-none hover:shadow-none transition-all duration-200"
+        >
+          ดูทั้งหมด →
+        </button>
+      </a>
+    </div>
+  </div>
+</section>
