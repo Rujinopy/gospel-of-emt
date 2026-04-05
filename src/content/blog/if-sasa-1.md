@@ -1,7 +1,7 @@
 ---
 title: 'Re: zero รูทซาซาเกะรุ(รูทสังเวยตน/ゼロカラササゲルイセカイセイカツ)'
 description: "Re: zero รูทซาซาเกะรุ (รูทสังเวยตน/ゼロカラササゲルイセカイセイカツ) ฉบับแปลไทย"
-date: 2026-05-04
+date: 2026-04-03
 image: "@assets/blog/if-sasa-1.webp"
 imageAlt: re zero IF-SASAGERU แปลไทย
 categories: [Sasageru]
