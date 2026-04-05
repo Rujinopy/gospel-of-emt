@@ -80,7 +80,7 @@ tags?.sort((a: string, b: string) => a.localeCompare(b));
     image && showImage && (
       <div class="mb-8  rounded-lg intersect:animate-fadeDown opacity-0 intersect-no-queue bg-transparent">
         <Image
-          class="w-full rounded-lg md:rounded-none max-w-4xl mx-auto border border-black"
+          class="block w-full h-auto rounded-lg md:rounded-none max-w-5xl mx-auto border border-black md:w-auto md:max-w-full md:max-h-[60vh]"
           src={image}
           alt={imageAlt || ""}
           height={500}
