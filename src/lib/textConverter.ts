@@ -39,6 +39,7 @@ export const mapCategoryName = (category: string): string => {
     "ayamatsu": "Ayamatsu: รูทเย่อหยิ่ง",
     "mimagau": "Mimagau: รูทสลับเพศ",
     "oboberu": "Oboberu: รูทโทสะ",
+    "sasageru": "Sasageru: รูทสังเวยตน",
     "ex5": "นิยายสปินออฟ EX5 \"ตำนานเจ้าหญิงสีชาด\"",
     "tsugihagu": "Tsugihagu: รูทตะกละ",
     "azamuku": "Azamuku: รูทหลอกลวง",
