@@ -78,9 +78,9 @@ tags?.sort((a: string, b: string) => a.localeCompare(b));
 <div class="mt-2">
   {
     image && showImage && (
-      <div class="mb-8 glass dark:glass-thin rounded-lg intersect:animate-fadeDown opacity-0 intersect-no-queue">
+      <div class="mb-8  rounded-lg intersect:animate-fadeDown opacity-0 intersect-no-queue bg-transparent">
         <Image
-          class="w-full rounded-lg max-w-3xl mx-auto"
+          class="w-full rounded-lg md:rounded-none max-w-4xl mx-auto border border-black"
           src={image}
           alt={imageAlt || ""}
           height={500}
