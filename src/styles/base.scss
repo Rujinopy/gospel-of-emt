@@ -11,8 +11,49 @@ html {
 html[data-reader-theme="eye-care"] {
   --reader-body-bg: #f4efde;
   --reader-body-color: #3d4637;
-  --reader-surface-bg: rgba(248, 243, 226, 0.96);
+  --reader-surface-bg: #ede8d4;
   --reader-surface-border: rgba(148, 163, 140, 0.9);
+
+  /* Paint the root itself so anything without its own bg inherits */
+  background-color: #f4efde;
+}
+
+/* body and all direct layout surfaces */
+html[data-reader-theme="eye-care"] body {
+  background-color: #f4efde !important;
+}
+
+/* Glass components hardcode bg-white / dark-bg, override them */
+html[data-reader-theme="eye-care"] .glass,
+html[data-reader-theme="eye-care"] .glass-t,
+html[data-reader-theme="eye-care"] .glass-b,
+html[data-reader-theme="eye-care"] .glass-t-borderless {
+  background-color: #ede8d4 !important;
+  background-image: none !important;
+  border-color: rgba(148, 163, 140, 0.7) !important;
+}
+
+/* Tailwind bg-white / bg-bg-p utility classes used on cards and panels */
+html[data-reader-theme="eye-care"] [class*="bg-white"],
+html[data-reader-theme="eye-care"] [class*="bg-bg-p"],
+html[data-reader-theme="eye-care"] [class*="bg-bg-s"],
+html[data-reader-theme="eye-care"] [class*="bg-bg-t"] {
+  background-color: #ede8d4 !important;
+}
+
+/* Inline bg set via Astro/React literal hex — catch the header/footer shell */
+html[data-reader-theme="eye-care"] header,
+html[data-reader-theme="eye-care"] footer,
+html[data-reader-theme="eye-care"] nav {
+  background-color: #ede8d4 !important;
+}
+
+/* Keep images and media transparent — do NOT paint over them */
+html[data-reader-theme="eye-care"] img,
+html[data-reader-theme="eye-care"] picture,
+html[data-reader-theme="eye-care"] video,
+html[data-reader-theme="eye-care"] canvas {
+  background-color: transparent !important;
 }
 
 html.dark {
@@ -25,7 +66,7 @@ html.dark {
 body {
   @apply font-notoLooped font-normal leading-relaxed text-txt-s dark:text-darkmode-txt-s;
   @apply bg-bg-p dark:bg-darkmode-bg-p;
-  @apply flex flex-col min-h-screen lg:mx-8;
+  @apply flex flex-col min-h-screen;
   background-color: var(--reader-body-bg);
   color: var(--reader-body-color);
 }
