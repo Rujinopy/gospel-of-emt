@@ -2,8 +2,6 @@
 .content {
   // Base
   @apply prose max-w-none intersect:animate-fadeUp;
-  font-size: var(--reader-font-size);
-  line-height: var(--reader-line-height);
   color: var(--reader-body-color);
   @apply prose-headings:mb-[.3em] prose-headings:mt-[.6em];
   @apply prose-h1:text-h1-sm md:prose-h1:text-h1;
@@ -51,8 +49,26 @@
   
   // Preserve markdown line breaks and formatting exactly as written
   p {
+    font-size: var(--reader-font-size);
+    line-height: var(--reader-line-height);
     white-space: pre-wrap; // Preserves both line breaks and spaces
     word-wrap: break-word; // Prevent overflow
+  }
+
+  li,
+  blockquote,
+  td,
+  th {
+    font-size: var(--reader-font-size);
+    line-height: var(--reader-line-height);
+  }
+
+  li p,
+  blockquote p,
+  td p,
+  th p {
+    font-size: inherit;
+    line-height: inherit;
   }
 }
 
