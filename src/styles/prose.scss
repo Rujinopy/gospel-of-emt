@@ -2,6 +2,9 @@
 .content {
   // Base
   @apply prose max-w-none intersect:animate-fadeUp;
+  font-size: var(--reader-font-size);
+  line-height: var(--reader-line-height);
+  color: var(--reader-body-color);
   @apply prose-headings:mb-[.3em] prose-headings:mt-[.6em];
   @apply prose-h1:text-h1-sm md:prose-h1:text-h1;
   @apply prose-h2:text-h2-sm md:prose-h2:text-h2;
@@ -26,6 +29,17 @@
   @apply prose-td:relative prose-td:z-10 prose-td:px-3 prose-td:py-2 prose-td:text-txt-s prose-td:dark:text-darkmode-txt-s;
   // Lists
   @apply prose-li:text-txt-s prose-li:dark:text-darkmode-txt-s;
+
+  --tw-prose-body: var(--reader-body-color);
+  --tw-prose-headings: var(--reader-body-color);
+  --tw-prose-links: var(--reader-body-color);
+  --tw-prose-bold: var(--reader-body-color);
+  --tw-prose-bullets: var(--reader-body-color);
+  --tw-prose-counters: var(--reader-body-color);
+  --tw-prose-quotes: var(--reader-body-color);
+  --tw-prose-quote-borders: var(--reader-surface-border);
+  --tw-prose-hr: var(--reader-surface-border);
+
   li::marker {
     @apply text-txt-s dark:text-darkmode-txt-s;
   }
@@ -40,4 +54,9 @@
     white-space: pre-wrap; // Preserves both line breaks and spaces
     word-wrap: break-word; // Prevent overflow
   }
+}
+
+html[data-reader-theme="eye-care"] .content {
+  background-color: var(--reader-surface-bg);
+  border-color: var(--reader-surface-border);
 }

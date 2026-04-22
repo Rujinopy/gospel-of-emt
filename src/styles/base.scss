@@ -1,11 +1,33 @@
 html {
+  --reader-font-size: 1rem;
+  --reader-line-height: 1.95;
+  --reader-body-bg: #ffffff;
+  --reader-body-color: #222222;
+  --reader-surface-bg: rgba(255, 255, 255, 0.82);
+  --reader-surface-border: rgba(221, 221, 221, 0.95);
   @apply text-base h-screen;
+}
+
+html[data-reader-theme="eye-care"] {
+  --reader-body-bg: #f4efde;
+  --reader-body-color: #3d4637;
+  --reader-surface-bg: rgba(248, 243, 226, 0.96);
+  --reader-surface-border: rgba(148, 163, 140, 0.9);
+}
+
+html.dark {
+  --reader-body-bg: #222222;
+  --reader-body-color: #dddddd;
+  --reader-surface-bg: rgba(34, 34, 34, 0.9);
+  --reader-surface-border: rgba(68, 68, 68, 0.95);
 }
 
 body {
   @apply font-notoLooped font-normal leading-relaxed text-txt-s dark:text-darkmode-txt-s;
   @apply bg-bg-p dark:bg-darkmode-bg-p;
   @apply flex flex-col min-h-screen lg:mx-8;
+  background-color: var(--reader-body-bg);
+  color: var(--reader-body-color);
 }
 
 h1,
@@ -44,6 +66,7 @@ h6,
 
 p {
   @apply intersect:animate-fade opacity-0;
+  line-height: var(--reader-line-height);
 }
 
 b,
@@ -58,6 +81,11 @@ img {
 a:hover,
 .a:hover {
   @apply opacity-100;
+}
+
+main,
+article {
+  color: inherit;
 }
 
 hr {

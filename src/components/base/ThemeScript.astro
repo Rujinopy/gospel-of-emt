@@ -1,40 +1,172 @@
 <script is:inline data-astro-rerun>
-  const defaultTheme = "system";
+  const readerDefaults = {
+    theme: "light",
+    fontSize: "base",
+    lineHeight: "relaxed",
+  };
 
-  function getTheme(defaultTheme) {
-    var darkMode = defaultTheme === "dark" ? true : false;
-    if (localStorage.getItem("theme") === "system") {
-      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        darkMode = true;
-      }
-    } else if (localStorage.getItem("theme") === "dark") {
-      darkMode = true;
-    } else if (localStorage.getItem("theme") === "light") {
-      darkMode = false;
+  const readerFontSizeOrder = ["sm", "base", "lg"];
+  const readerFontSizeLabelMap = {
+    sm: "เล็ก",
+    base: "มาตรฐาน",
+    lg: "ใหญ่",
+  };
+  const readerFontSizeValueMap = {
+    sm: "0.95rem",
+    base: "1rem",
+    lg: "1.125rem",
+  };
+  const readerLineHeightValueMap = {
+    compact: "1.7",
+    relaxed: "1.95",
+    loose: "2.2",
+  };
+
+  function getSystemTheme() {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+
+  function getStoredTheme() {
+    const storedTheme = localStorage.getItem("reader-theme") || localStorage.getItem("theme");
+
+    if (storedTheme === "system") {
+      return getSystemTheme();
     }
-    return darkMode;
+
+    if (storedTheme === "light" || storedTheme === "dark" || storedTheme === "eye-care") {
+      return storedTheme;
+    }
+
+    return readerDefaults.theme;
   }
 
-  function setTheme(darkMode) {
-    // Update DOM
-    darkMode
-      ? document.documentElement.classList.add("dark")
-      : document.documentElement.classList.remove("dark");
-    // Update localStorage
-    localStorage.setItem("theme", darkMode ? "dark" : "light");
+  function getStoredFontSize() {
+    const storedFontSize = localStorage.getItem("reader-font-size");
+    return readerFontSizeOrder.includes(storedFontSize) ? storedFontSize : readerDefaults.fontSize;
   }
 
-  // This prevents flickering back to default theme before the page is fully loaded
-  setTheme(getTheme(defaultTheme));
+  function getStoredLineHeight() {
+    const storedLineHeight = localStorage.getItem("reader-line-height");
+    return storedLineHeight && readerLineHeightValueMap[storedLineHeight]
+      ? storedLineHeight
+      : readerDefaults.lineHeight;
+  }
 
-  document.addEventListener("astro:page-load", () => {
-    setTheme(getTheme(defaultTheme));
-    // Theme switcher
-    var themeSwitch = document.querySelectorAll("[data-theme-switcher]");
-    themeSwitch.forEach((el) => {
-      el.addEventListener("change", (e) => {
-        setTheme(e.target.checked);
+  function getReaderPreferences() {
+    return {
+      theme: getStoredTheme(),
+      fontSize: getStoredFontSize(),
+      lineHeight: getStoredLineHeight(),
+    };
+  }
+
+  function applyReaderPreferences(preferences) {
+    const root = document.documentElement;
+    const body = document.body;
+    const isDarkTheme = preferences.theme === "dark";
+
+    root.classList.toggle("dark", isDarkTheme);
+    root.dataset.readerTheme = preferences.theme;
+    root.style.setProperty("--reader-font-size", readerFontSizeValueMap[preferences.fontSize]);
+    root.style.setProperty("--reader-line-height", readerLineHeightValueMap[preferences.lineHeight]);
+
+    if (body) {
+      body.dataset.readerTheme = preferences.theme;
+    }
+
+    localStorage.setItem("theme", preferences.theme);
+    localStorage.setItem("reader-theme", preferences.theme);
+    localStorage.setItem("reader-font-size", preferences.fontSize);
+    localStorage.setItem("reader-line-height", preferences.lineHeight);
+  }
+
+  function syncReaderControls(preferences) {
+    document.querySelectorAll("[data-reader-theme-option]").forEach((button) => {
+      const active = button.getAttribute("data-reader-theme-option") === preferences.theme;
+      button.setAttribute("aria-pressed", String(active));
+      button.setAttribute("data-reader-active", String(active));
+    });
+
+    document.querySelectorAll("[data-reader-line-height-option]").forEach((button) => {
+      const active = button.getAttribute("data-reader-line-height-option") === preferences.lineHeight;
+      button.setAttribute("aria-pressed", String(active));
+      button.setAttribute("data-reader-active", String(active));
+    });
+
+    const label = document.querySelector("[data-reader-font-size-label]");
+    if (label) {
+      label.textContent = readerFontSizeLabelMap[preferences.fontSize];
+    }
+  }
+
+  function updateReaderPreferences(nextPreferences) {
+    const mergedPreferences = {
+      ...getReaderPreferences(),
+      ...nextPreferences,
+    };
+
+    applyReaderPreferences(mergedPreferences);
+    syncReaderControls(mergedPreferences);
+  }
+
+  function changeFontSize(direction) {
+    const currentPreferences = getReaderPreferences();
+    const currentIndex = readerFontSizeOrder.indexOf(currentPreferences.fontSize);
+    const nextIndex = direction === "increase"
+      ? Math.min(currentIndex + 1, readerFontSizeOrder.length - 1)
+      : Math.max(currentIndex - 1, 0);
+
+    updateReaderPreferences({
+      fontSize: readerFontSizeOrder[nextIndex],
+    });
+  }
+
+  function bindReaderControls() {
+    document.querySelectorAll("[data-reader-theme-option]").forEach((button) => {
+      if (button.dataset.bound === "true") {
+        return;
+      }
+
+      button.dataset.bound = "true";
+      button.addEventListener("click", () => {
+        updateReaderPreferences({
+          theme: button.getAttribute("data-reader-theme-option"),
+        });
       });
     });
-  });
+
+    document.querySelectorAll("[data-reader-line-height-option]").forEach((button) => {
+      if (button.dataset.bound === "true") {
+        return;
+      }
+
+      button.dataset.bound = "true";
+      button.addEventListener("click", () => {
+        updateReaderPreferences({
+          lineHeight: button.getAttribute("data-reader-line-height-option"),
+        });
+      });
+    });
+
+    document.querySelectorAll("[data-reader-font-size-step]").forEach((button) => {
+      if (button.dataset.bound === "true") {
+        return;
+      }
+
+      button.dataset.bound = "true";
+      button.addEventListener("click", () => {
+        changeFontSize(button.getAttribute("data-reader-font-size-step"));
+      });
+    });
+  }
+
+  function initReaderPreferences() {
+    const preferences = getReaderPreferences();
+    applyReaderPreferences(preferences);
+    syncReaderControls(preferences);
+    bindReaderControls();
+  }
+
+  initReaderPreferences();
+  document.addEventListener("astro:page-load", initReaderPreferences);
 </script>
