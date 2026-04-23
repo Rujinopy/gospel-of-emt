@@ -93,10 +93,9 @@
       button.setAttribute("data-reader-active", String(active));
     });
 
-    const label = document.querySelector("[data-reader-font-size-label]");
-    if (label) {
+    document.querySelectorAll("[data-reader-font-size-label]").forEach((label) => {
       label.textContent = readerFontSizeLabelMap[preferences.fontSize];
-    }
+    });
   }
 
   function updateReaderPreferences(nextPreferences) {

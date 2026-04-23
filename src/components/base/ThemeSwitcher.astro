@@ -5,7 +5,7 @@ import ThemeScript from "@components/base/ThemeScript.astro";
 <div class="relative inline-flex" data-reader-settings>
   <button
     type="button"
-    class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/70 bg-bg-p/80 text-txt-p shadow-sm transition-colors hover:bg-bg-s/80 dark:border-darkmode-border/80 dark:bg-darkmode-bg-t/70 dark:text-darkmode-txt-p dark:hover:bg-darkmode-bg-s/70"
+    class="inline-flex h-10 w-10 items-center justify-center rounded-full  text-txt-p shadow-sm transition-colors hover:bg-bg-s/80 dark:border-darkmode-border/80 d dark:text-darkmode-txt-p dark:hover:bg-darkmode-bg-s/70"
     data-reader-settings-trigger
     aria-label="Open reading settings"
     aria-expanded="false"
@@ -31,17 +31,17 @@ import ThemeScript from "@components/base/ThemeScript.astro";
         <div class="grid grid-cols-2 overflow-hidden rounded-xl border border-border dark:border-darkmode-border">
           <button
             type="button"
-            class="reader-option-btn border-r border-border px-4 py-2.5 text-base font-semibold dark:border-darkmode-border"
+            class="reader-option-btn border-r border-border px-4 py-2.5 text-base font-notoLooped dark:border-darkmode-border"
             data-reader-font-size-step="decrease"
           >
-            Aa-
+            มาตรฐาน
           </button>
           <button
             type="button"
-            class="reader-option-btn px-4 py-2.5 text-base font-semibold"
+            class="reader-option-btn px-4 py-2.5 text-base font-notoLooped"
             data-reader-font-size-step="increase"
           >
-            Aa+
+            ใหญ่
           </button>
         </div>
       </section>
