@@ -16,6 +16,12 @@
   }
 }
 
+html[data-reader-theme="eye-care"] .neobrutalism-button {
+  background-color: var(--reader-surface-bg);
+  border-color: var(--reader-surface-border);
+  color: var(--reader-body-color);
+}
+
 .glass-thin { --glass-border-width: 2px; }
 .glass-thick { --glass-border-width: 8px; }
 

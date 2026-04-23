@@ -93,14 +93,14 @@ const SearchPage = ({ searchList }: Props) => {
             searchResults?.map(({ item }, index) => (
               <div className="py-2 px-0" key={`search-${index}`}>
                 <div className="h-full neobrutalism-button font-notoLooped cursor-pointer col-10 lg:col-8 mx-auto rounded-lg p-4 intersect:animate-fade opacity-0">
-                  <h4 className="mb-2">
+                  <h4 className="mb-2 !font-notoLooped">
                     <a href={"/" + getPath(item)}>
                       {item.data.title}
                     </a>
                   </h4>
-                  { item.data.description && (
+                  {/* { item.data.description && (
                     <p className="">{item.data.description}</p>
-                  )}
+                  )} */}
                   {  !item.data.description && item.data.autodescription && item.body && (
                     <p className="">{plainify(item.body.slice(0, descriptionLength))}</p>
                   )}
