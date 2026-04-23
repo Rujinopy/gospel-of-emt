@@ -139,16 +139,19 @@ const { title } = Astro.props;
 <script is:inline>
   function initReadingBar() {
     const bar = document.getElementById("reading-bar");
-    const content = document.querySelector(".content");
-    if (!bar || !content) return;
+    const triggerTarget =
+      document.querySelector("[data-reading-bar-trigger]") ||
+      document.querySelector(".content");
+
+    if (!bar || !triggerTarget) return;
 
     if (bar._readingBarCleanup) {
       bar._readingBarCleanup();
     }
 
     const updateVisibility = () => {
-      const contentRect = content.getBoundingClientRect();
-      const show = contentRect.top <= 0;
+      const triggerRect = triggerTarget.getBoundingClientRect();
+      const show = triggerRect.top <= 0;
       bar.classList.toggle("-translate-y-full", !show);
       bar.setAttribute("aria-hidden", String(!show));
     };
