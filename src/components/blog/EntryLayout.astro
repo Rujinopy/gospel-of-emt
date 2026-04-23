@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "@components/base/BaseLayout.astro";
 import BlogCard from "@components/blog/Card.astro";
+import ReadingBar from "@components/blog/ReadingBar.astro";
 import Share from "@components/common/Share.astro";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { plainify } from "@lib/textConverter";
@@ -52,6 +53,7 @@ const nextChapterUrl = nextEntry ? `/blog/${nextEntry.id}` : null;
 ---
 
 <BaseLayout title={title} description={entryDescription} image={image?.src}>
+  <ReadingBar title={title} />
   <section class="flex md:container md:p-4 p-2">
     <div class=`w-full ${actuallyHideToc ? "" : "md:col-9"}`>
       <div class="flex items-center justify-between space-x-10">
