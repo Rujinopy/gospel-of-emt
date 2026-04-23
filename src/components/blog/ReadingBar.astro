@@ -43,22 +43,32 @@ const { title } = Astro.props;
             <section class="space-y-2">
               <div class="flex items-center justify-between gap-3">
                 <h2 class="text-sm font-semibold">ขนาดตัวอักษร</h2>
-                <span class="text-xs text-txt-light dark:text-darkmode-txt-light" data-reader-font-size-label>มาตรฐาน</span>
+                <span class="text-xs text-txt-light dark:text-darkmode-txt-light" data-reader-font-size-label>ค่าเริ่มต้น</span>
               </div>
-              <div class="grid grid-cols-2 overflow-hidden rounded-xl border border-border dark:border-darkmode-border">
+              <div class="grid grid-cols-3 overflow-hidden rounded-xl border border-border dark:border-darkmode-border">
                 <button
                   type="button"
-                  class="reader-option-btn border-r border-border px-4 py-2.5 text- font-notoLooped dark:border-darkmode-border"
+                  class="reader-option-btn border-r border-border px-4 py-2.5 text-base font-notoLooped dark:border-darkmode-border"
                   data-reader-font-size-step="decrease"
+                  aria-label="Decrease font size"
                 >
-                  มาตรฐาน
+                  −
+                </button>
+                <button
+                  type="button"
+                  class="reader-option-btn border-r border-border px-4 py-2.5 text-base font-notoLooped dark:border-darkmode-border"
+                  data-reader-font-size-reset
+                  aria-label="Reset font size to default"
+                >
+                  ค่าเริ่มต้น
                 </button>
                 <button
                   type="button"
                   class="reader-option-btn px-4 py-2.5 text-base font-notoLooped"
                   data-reader-font-size-step="increase"
+                  aria-label="Increase font size"
                 >
-                  ใหญ่
+                  +
                 </button>
               </div>
             </section>
